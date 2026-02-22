@@ -53,11 +53,17 @@ export default function HomePage() {
 
   const typeColors: Record<string, string> = { Competition: "badge", Hackathon: "badge badge-violet", Award: "badge badge-pink", Certification: "badge badge-emerald" };
 
-  const research: Research[] = portfolioData.research.map((r, i) => ({
-    id: r.id || `res-${i}`, title: r.title, abstract: r.abstract || "",
-    publicationName: r.publicationName || "", pdfLink: r.pdfLink || "",
-    doiLink: r.doiLink || "", status: r.status as Research["status"],
-  }));
+  const research: Research[] = portfolioData.research.map((r, i) => {
+    const item = r as Record<string, unknown>;
+    return {
+      id: (item.id as string) || `res-${i}`, title: (item.title as string) || "",
+      abstract: (item.abstract as string) || "",
+      publicationName: (item.publicationName as string) || "",
+      pdfLink: (item.pdfLink as string) || "",
+      doiLink: (item.doiLink as string) || "",
+      status: (item.status as Research["status"]) || "In Progress",
+    };
+  });
 
   const publishedPosts: BlogPost[] = portfolioData.blogPosts
     .filter(p => p.status === "Published")
