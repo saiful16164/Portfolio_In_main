@@ -1,0 +1,174 @@
+{
+    "projects": [
+        {
+            "id": "1",
+            "title": "Smart Ledger",
+            "description": "A Flutter-based store management application for tracking customers, transactions, and generating financial reports.",
+            "technologies": [
+                "Flutter",
+                "Dart",
+                "Supabase",
+                "Riverpod"
+            ],
+            "githubLink": "https://github.com/saiful16164",
+            "demoLink": "",
+            "image": "💰",
+            "status": "Ongoing",
+            "featured": true,
+            "tags": [
+                "Mobile",
+                "Flutter"
+            ],
+            "features": [
+                "Customer Management",
+                "Transaction Tracking",
+                "Financial Reports"
+            ],
+            "sortOrder": 0
+        },
+        {
+            "id": "2",
+            "title": "Portfolio Website",
+            "description": "A modern, dark-mode portfolio website built with Next.js 16 featuring glassmorphism effects and smooth animations.",
+            "technologies": [
+                "Next.js",
+                "React",
+                "TypeScript",
+                "Tailwind CSS"
+            ],
+            "githubLink": "https://github.com/saiful16164",
+            "demoLink": "",
+            "image": "🌐",
+            "status": "Completed",
+            "featured": true,
+            "tags": [
+                "Web"
+            ],
+            "features": [
+                "Dark Mode",
+                "Responsive Design",
+                "Glassmorphism UI"
+            ],
+            "sortOrder": 1
+        }
+    ],
+    "research": [
+        {
+            "id": "1",
+            "title": "Sample Research Paper",
+            "abstract": "This is a placeholder for your research. Update this with your actual research details.",
+            "publicationName": "",
+            "pdfLink": "",
+            "doiLink": "",
+            "status": "In Progress"
+        }
+    ],
+    "skills": [
+        {
+            "id": "1",
+            "name": "Dart",
+            "category": "Programming Languages",
+            "proficiency": 85,
+            "sortOrder": 0
+        },
+        {
+            "id": "2",
+            "name": "Python",
+            "category": "Programming Languages",
+            "proficiency": 75,
+            "sortOrder": 1
+        },
+        {
+            "id": "3",
+            "name": "TypeScript",
+            "category": "Programming Languages",
+            "proficiency": 70,
+            "sortOrder": 2
+        },
+        {
+            "id": "4",
+            "name": "C/C++",
+            "category": "Programming Languages",
+            "proficiency": 65,
+            "sortOrder": 3
+        },
+        {
+            "id": "5",
+            "name": "Flutter",
+            "category": "Technologies",
+            "proficiency": 85,
+            "sortOrder": 0
+        },
+        {
+            "id": "6",
+            "name": "Next.js",
+            "category": "Technologies",
+            "proficiency": 70,
+            "sortOrder": 1
+        },
+        {
+            "id": "7",
+            "name": "React",
+            "category": "Technologies",
+            "proficiency": 65,
+            "sortOrder": 2
+        },
+        {
+            "id": "8",
+            "name": "Supabase",
+            "category": "Technologies",
+            "proficiency": 60,
+            "sortOrder": 3
+        },
+        {
+            "id": "9",
+            "name": "Git & GitHub",
+            "category": "Tools",
+            "proficiency": 80,
+            "sortOrder": 0
+        },
+        {
+            "id": "10",
+            "name": "VS Code",
+            "category": "Tools",
+            "proficiency": 90,
+            "sortOrder": 1
+        },
+        {
+            "id": "11",
+            "name": "Firebase",
+            "category": "Tools",
+            "proficiency": 55,
+            "sortOrder": 2
+        }
+    ],
+    "achievements": [
+        {
+            "id": "1",
+            "title": "Sample Achievement",
+            "description": "This is a placeholder. Update with your actual achievements.",
+            "type": "Competition",
+            "date": "2025",
+            "link": ""
+        }
+    ],
+    "blogPosts": [
+        {
+            "id": "1",
+            "title": "Getting Started with Flutter",
+            "excerpt": "A beginner's guide to building beautiful mobile apps with Flutter and Dart.",
+            "content": "Full blog post content goes here...",
+            "tags": [
+                "Flutter",
+                "Mobile"
+            ],
+            "status": "Draft",
+            "readTime": "5 min read",
+            "createdAt": "2025-01-15"
+        }
+    ],
+    "siteSettings": {
+        "profileImage": "/saiful_image.jpeg",
+        "resumeLink": "/resume.pdf"
+    }
+}
