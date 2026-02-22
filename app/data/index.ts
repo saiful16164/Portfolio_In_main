@@ -120,6 +120,7 @@ export const personalInfo: PersonalInfo = {
 
 // ===== HELPER DATA =====
 export const navLinks = [
+  { label: "Home", href: "#hero" },
   { label: "About", href: "#about" },
   { label: "Projects", href: "#projects" },
   { label: "Research", href: "#research" },

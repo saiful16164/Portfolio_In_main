@@ -368,7 +368,7 @@ export default function HomePage() {
       </section>
 
       {/* ===== RESUME SECTION ===== */}
-      <section id="resume" className="section">
+      {resumeLink && <section id="resume" className="section">
         <div className="container" style={{ maxWidth: "800px" }}>
           <SectionHeading title="Resume" subtitle="Download my resume or view it inline" />
           <div className="resume-card glass-card animate-fade-in-up">
@@ -402,7 +402,7 @@ export default function HomePage() {
             </div>
           </div>
         </div>
-      </section>
+      </section>}
 
       {/* ===== CONTACT SECTION ===== */}
       <section id="contact" className="section">
