@@ -23,18 +23,10 @@
   --border-color: rgba(255, 255, 255, 0.08);
   --border-hover: rgba(255, 255, 255, 0.15);
 
-  /* Gradients */
-  --gradient-main: linear-gradient(135deg, var(--cyan), var(--violet), var(--pink));
-  --gradient-cyan-violet: linear-gradient(135deg, var(--cyan), var(--violet));
-  --gradient-violet-pink: linear-gradient(135deg, var(--violet), var(--pink));
-  --gradient-glow: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(0, 212, 255, 0.06), transparent 40%);
-
   /* Shadows */
   --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
   --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.4);
   --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.5);
-  --shadow-cyan: 0 0 30px rgba(0, 212, 255, 0.15);
-  --shadow-violet: 0 0 30px rgba(168, 85, 247, 0.15);
 
   /* Spacing */
   --section-padding: 6rem 1.5rem;
@@ -72,8 +64,6 @@
   --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
   --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.08);
   --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.1);
-  --shadow-cyan: 0 0 30px rgba(0, 212, 255, 0.1);
-  --shadow-violet: 0 0 30px rgba(168, 85, 247, 0.1);
 }
 
 /* ===== TAILWIND THEME ===== */
@@ -126,13 +116,16 @@ body::before {
 ::-webkit-scrollbar {
   width: 6px;
 }
+
 ::-webkit-scrollbar-track {
   background: var(--bg-primary);
 }
+
 ::-webkit-scrollbar-thumb {
   background: var(--border-color);
   border-radius: var(--radius-full);
 }
+
 ::-webkit-scrollbar-thumb:hover {
   background: var(--border-hover);
 }
@@ -154,19 +147,9 @@ body::before {
   position: relative;
 }
 
-/* Gradient Text */
-.gradient-text {
-  background: var(--gradient-main);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.gradient-text-cv {
-  background: var(--gradient-cyan-violet);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+/* Accent Text */
+.accent-text {
+  color: var(--cyan);
 }
 
 /* Glassmorphism Card */
@@ -186,49 +169,14 @@ body::before {
   transform: translateY(-2px);
 }
 
-/* Glass Card with animated gradient border */
-.glass-card-glow {
-  position: relative;
-  background: var(--bg-glass);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-lg);
-  transition: all var(--transition-base);
-  overflow: hidden;
-}
-
-.glass-card-glow::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  padding: 1px;
-  background: var(--gradient-main);
-  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  mask-composite: exclude;
-  -webkit-mask-composite: xor;
-  opacity: 0;
-  transition: opacity var(--transition-base);
-}
-
-.glass-card-glow:hover::before {
-  opacity: 1;
-}
-
-.glass-card-glow:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-cyan);
-}
-
 /* Buttons */
 .btn-primary {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
   padding: 0.75rem 1.75rem;
-  background: var(--gradient-main);
-  color: #fff;
+  background: var(--cyan);
+  color: #0A0A0F;
   font-weight: 600;
   font-size: 0.95rem;
   border: none;
@@ -240,22 +188,10 @@ body::before {
   overflow: hidden;
 }
 
-.btn-primary::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, rgba(255,255,255,0.2), transparent);
-  opacity: 0;
-  transition: opacity var(--transition-fast);
-}
-
 .btn-primary:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 25px rgba(0, 212, 255, 0.3);
-}
-
-.btn-primary:hover::before {
-  opacity: 1;
+  filter: brightness(1.1);
 }
 
 .btn-outline {
@@ -278,7 +214,7 @@ body::before {
   border-color: var(--cyan);
   color: var(--cyan);
   transform: translateY(-2px);
-  box-shadow: var(--shadow-cyan);
+  box-shadow: 0 0 20px rgba(0, 212, 255, 0.12);
 }
 
 /* Badge/Tag */
@@ -326,6 +262,7 @@ body::before {
     opacity: 0;
     transform: translateY(30px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -333,8 +270,13 @@ body::before {
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes slideInLeft {
@@ -342,6 +284,7 @@ body::before {
     opacity: 0;
     transform: translateX(-40px);
   }
+
   to {
     opacity: 1;
     transform: translateX(0);
@@ -353,6 +296,7 @@ body::before {
     opacity: 0;
     transform: translateX(40px);
   }
+
   to {
     opacity: 1;
     transform: translateX(0);
@@ -360,37 +304,21 @@ body::before {
 }
 
 @keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
-}
 
-@keyframes pulse-glow {
-  0%, 100% {
-    box-shadow: 0 0 20px rgba(0, 212, 255, 0.2);
+  0%,
+  100% {
+    transform: translateY(0);
   }
+
   50% {
-    box-shadow: 0 0 40px rgba(0, 212, 255, 0.4);
+    transform: translateY(-10px);
   }
-}
-
-@keyframes gradient-shift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-@keyframes spin-slow {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-@keyframes shimmer {
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
 }
 
 @keyframes fillBar {
-  from { width: 0; }
+  from {
+    width: 0;
+  }
 }
 
 /* Animation utility classes */
@@ -414,44 +342,29 @@ body::before {
   animation: float 3s ease-in-out infinite;
 }
 
-.animate-gradient {
-  background-size: 200% 200%;
-  animation: gradient-shift 4s ease infinite;
-}
-
-.animate-spin-slow {
-  animation: spin-slow 20s linear infinite;
-}
-
 /* Delay utilities */
-.delay-100 { animation-delay: 0.1s; }
-.delay-200 { animation-delay: 0.2s; }
-.delay-300 { animation-delay: 0.3s; }
-.delay-400 { animation-delay: 0.4s; }
-.delay-500 { animation-delay: 0.5s; }
-.delay-600 { animation-delay: 0.6s; }
-
-/* ===== SECTION DECORATIONS ===== */
-.section-glow {
-  position: absolute;
-  width: 400px;
-  height: 400px;
-  border-radius: 50%;
-  filter: blur(100px);
-  opacity: 0.1;
-  pointer-events: none;
+.delay-100 {
+  animation-delay: 0.1s;
 }
 
-.section-glow-cyan {
-  background: var(--cyan);
+.delay-200 {
+  animation-delay: 0.2s;
 }
 
-.section-glow-violet {
-  background: var(--violet);
+.delay-300 {
+  animation-delay: 0.3s;
 }
 
-.section-glow-pink {
-  background: var(--pink);
+.delay-400 {
+  animation-delay: 0.4s;
+}
+
+.delay-500 {
+  animation-delay: 0.5s;
+}
+
+.delay-600 {
+  animation-delay: 0.6s;
 }
 
 /* ===== LINK STYLES ===== */
@@ -465,6 +378,7 @@ a {
   :root {
     --section-padding: 4rem 1rem;
   }
+
   .container {
     padding: 0 1rem;
   }

@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { personalInfo } from "@/app/data";
 
 export default function Footer() {
@@ -12,11 +11,11 @@ export default function Footer() {
         {/* Top Row */}
         <div className="footer-top">
           <div className="footer-brand">
-            <Link href="/" className="footer-logo">
+            <a href="#" className="footer-logo" onClick={() => typeof window !== "undefined" && window.scrollTo({ top: 0, behavior: "smooth" })}>
               <span style={{ color: "var(--cyan)", fontFamily: "monospace" }}>&lt;</span>
-              <span className="gradient-text">Saiful</span>
+              <span style={{ color: "var(--cyan)", fontWeight: 700 }}>Saiful</span>
               <span style={{ color: "var(--cyan)", fontFamily: "monospace" }}>/&gt;</span>
-            </Link>
+            </a>
             <p className="footer-tagline">
               Building the future, one line of code at a time.
             </p>
@@ -24,10 +23,10 @@ export default function Footer() {
 
           <div className="footer-links-group">
             <h4 className="footer-heading">Navigation</h4>
-            <Link href="/about" className="footer-link">About</Link>
-            <Link href="/projects" className="footer-link">Projects</Link>
-            <Link href="/skills" className="footer-link">Skills</Link>
-            <Link href="/contact" className="footer-link">Contact</Link>
+            <a href="#about" className="footer-link">About</a>
+            <a href="#projects" className="footer-link">Projects</a>
+            <a href="#skills" className="footer-link">Skills</a>
+            <a href="#contact" className="footer-link">Contact</a>
           </div>
 
           <div className="footer-links-group">
@@ -50,7 +49,7 @@ export default function Footer() {
         {/* Bottom */}
         <div className="footer-bottom">
           <p className="footer-copyright">
-            © {currentYear} {personalInfo.name}. All rights reserved.
+            &copy; {currentYear} {personalInfo.name}. All rights reserved.
           </p>
           <button
             onClick={() => typeof window !== "undefined" && window.scrollTo({ top: 0, behavior: "smooth" })}
@@ -87,6 +86,7 @@ export default function Footer() {
           text-decoration: none;
           display: inline-flex;
           gap: 2px;
+          cursor: pointer;
         }
         .footer-tagline {
           margin-top: 0.75rem;

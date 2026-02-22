@@ -7,10 +7,10 @@ import { personalInfo } from "@/app/data";
 export default function ContactForm() {
   const searchParams = useSearchParams();
   const sent = searchParams.get("sent") === "true";
-  const [redirectUrl, setRedirectUrl] = useState("/contact?sent=true");
+  const [redirectUrl, setRedirectUrl] = useState("/?sent=true#contact");
 
   useEffect(() => {
-    setRedirectUrl(`${window.location.origin}/contact?sent=true`);
+    setRedirectUrl(`${window.location.origin}/?sent=true#contact`);
   }, []);
   return (
     <>

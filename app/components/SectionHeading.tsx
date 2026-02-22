@@ -12,7 +12,7 @@ export default function SectionHeading({
   return (
     <div className={`section-heading ${align === "center" ? "section-heading-center" : ""}`}>
       <h2 className="section-title">
-        <span className="gradient-text">{title}</span>
+        <span className="accent-text">{title}</span>
       </h2>
       {subtitle && <p className="section-subtitle">{subtitle}</p>}
       <div className="section-underline" />
@@ -45,7 +45,7 @@ export default function SectionHeading({
           width: 60px;
           height: 3px;
           border-radius: 3px;
-          background: var(--gradient-main);
+          background: var(--cyan);
         }
         @media (max-width: 640px) {
           .section-title {

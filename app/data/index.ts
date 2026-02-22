@@ -120,14 +120,13 @@ export const personalInfo: PersonalInfo = {
 
 // ===== HELPER DATA =====
 export const navLinks = [
-  { label: "Home", href: "/", icon: "🏠" },
-  { label: "About", href: "/about", icon: "👤" },
-  { label: "Projects", href: "/projects", icon: "💻" },
-  { label: "Research", href: "/research", icon: "🔬" },
-  { label: "Skills", href: "/skills", icon: "🧠" },
-  { label: "Achievements", href: "/achievements", icon: "🏆" },
-  { label: "Blog", href: "/blog", icon: "✍️" },
-  { label: "Contact", href: "/contact", icon: "📬" },
+  { label: "About", href: "#about" },
+  { label: "Projects", href: "#projects" },
+  { label: "Research", href: "#research" },
+  { label: "Skills", href: "#skills" },
+  { label: "Achievements", href: "#achievements" },
+  { label: "Blog", href: "#blog" },
+  { label: "Contact", href: "#contact" },
 ];
 
 export const projectCategories = [

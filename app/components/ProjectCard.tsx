@@ -1,19 +1,18 @@
 "use client";
 
 import { Project } from "@/app/data";
-import Link from "next/link";
 
 export default function ProjectCard({ project }: { project: Project }) {
   return (
-    <div className="project-card glass-card-glow">
-      {/* Image / Emoji area */}
+    <div className="project-card glass-card">
+      {/* Image area */}
       <div className="project-image-area">
-        <span className="project-emoji">{project.image}</span>
+        <span className="project-initial">{project.title.charAt(0)}</span>
         <div className="project-status-row">
           <span className={`status-badge ${project.status === "Ongoing" ? "status-ongoing" : "status-completed"}`}>
             {project.status}
           </span>
-          {project.featured && <span className="featured-badge">⭐ Featured</span>}
+          {project.featured && <span className="featured-badge">Featured</span>}
         </div>
       </div>
 
@@ -57,12 +56,15 @@ export default function ProjectCard({ project }: { project: Project }) {
           display: flex;
           align-items: center;
           justify-content: center;
-          background: linear-gradient(135deg, rgba(0, 212, 255, 0.05), rgba(168, 85, 247, 0.05));
+          background: rgba(0, 212, 255, 0.04);
           border-bottom: 1px solid var(--border-color);
           min-height: 140px;
         }
-        .project-emoji {
-          font-size: 3.5rem;
+        .project-initial {
+          font-size: 3rem;
+          font-weight: 800;
+          color: var(--cyan);
+          opacity: 0.6;
         }
         .project-status-row {
           position: absolute;

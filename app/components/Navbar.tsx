@@ -1,15 +1,13 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { navLinks } from "@/app/data";
 import { useTheme } from "./ThemeProvider";
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const pathname = usePathname();
+  const [activeSection, setActiveSection] = useState("");
   const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
@@ -18,39 +16,60 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Close mobile menu on route change
+  // Track active section via IntersectionObserver
   useEffect(() => {
+    const sectionIds = navLinks.map((l) => l.href.replace("#", ""));
+    const observers: IntersectionObserver[] = [];
+
+    sectionIds.forEach((id) => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            setActiveSection(`#${id}`);
+          }
+        },
+        { threshold: 0.3, rootMargin: "-80px 0px -50% 0px" }
+      );
+      observer.observe(el);
+      observers.push(observer);
+    });
+
+    return () => observers.forEach((o) => o.disconnect());
+  }, []);
+
+  const handleNavClick = () => {
     setMobileOpen(false);
-  }, [pathname]);
+  };
 
   return (
     <nav className={`navbar ${scrolled ? "navbar-scrolled" : ""}`}>
       <div className="navbar-inner container">
         {/* Logo */}
-        <Link href="/" className="navbar-logo">
+        <a href="#" className="navbar-logo" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
           <span className="logo-bracket">&lt;</span>
-          <span className="gradient-text">Saiful</span>
+          <span className="logo-name">Saiful</span>
           <span className="logo-bracket">/&gt;</span>
-        </Link>
+        </a>
 
         {/* Desktop Links */}
         <div className="navbar-links">
           {navLinks.map((link) => (
-            <Link
+            <a
               key={link.href}
               href={link.href}
-              className={`nav-link ${pathname === link.href ? "nav-link-active" : ""}`}
+              className={`nav-link ${activeSection === link.href ? "nav-link-active" : ""}`}
             >
-              <span className="nav-link-icon">{link.icon}</span>
               {link.label}
-            </Link>
+            </a>
           ))}
         </div>
 
         {/* Actions */}
         <div className="navbar-actions">
           {/* Resume CTA */}
-          <Link href="/resume" className="resume-btn">
+          <a href="#resume" className="resume-btn">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
               <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
               <polyline points="14 2 14 8 20 8" />
@@ -59,7 +78,7 @@ export default function Navbar() {
               <polyline points="10 9 9 9 8 9" />
             </svg>
             Resume
-          </Link>
+          </a>
 
           {/* Theme Toggle */}
           <button
@@ -97,24 +116,23 @@ export default function Navbar() {
       {/* Mobile Menu */}
       <div className={`mobile-menu ${mobileOpen ? "mobile-menu-open" : ""}`}>
         {navLinks.map((link) => (
-          <Link
+          <a
             key={link.href}
             href={link.href}
-            className={`mobile-nav-link ${pathname === link.href ? "mobile-nav-link-active" : ""}`}
-            onClick={() => setMobileOpen(false)}
+            className={`mobile-nav-link ${activeSection === link.href ? "mobile-nav-link-active" : ""}`}
+            onClick={handleNavClick}
           >
-            <span className="mobile-nav-icon">{link.icon}</span>
             {link.label}
-          </Link>
+          </a>
         ))}
         <div className="mobile-menu-divider" />
-        <Link
-          href="/resume"
+        <a
+          href="#resume"
           className="mobile-resume-btn"
-          onClick={() => setMobileOpen(false)}
+          onClick={handleNavClick}
         >
-          📄 View Resume
-        </Link>
+          View Resume
+        </a>
       </div>
 
       <style jsx>{`
@@ -163,6 +181,7 @@ export default function Navbar() {
           text-decoration: none;
           transition: transform 0.2s ease;
           flex-shrink: 0;
+          cursor: pointer;
         }
         .navbar-logo:hover {
           transform: scale(1.03);
@@ -171,6 +190,10 @@ export default function Navbar() {
           color: var(--cyan);
           font-family: var(--font-mono, monospace);
           font-weight: 400;
+        }
+        .logo-name {
+          color: var(--cyan);
+          font-weight: 700;
         }
 
         /* ===== DESKTOP NAV LINKS ===== */
@@ -197,28 +220,20 @@ export default function Navbar() {
           white-space: nowrap;
           position: relative;
         }
-        .nav-link-icon {
-          font-size: 0.85rem;
-          line-height: 1;
-          transition: transform 0.2s ease;
-        }
         .nav-link:hover {
           color: var(--text-primary);
           background: var(--bg-glass-strong);
         }
-        .nav-link:hover .nav-link-icon {
-          transform: scale(1.15);
-        }
 
-        /* Active link — gradient pill */
+        /* Active link — solid accent pill */
         .nav-link-active {
           color: #fff;
-          background: linear-gradient(135deg, rgba(0, 212, 255, 0.2), rgba(168, 85, 247, 0.2));
+          background: rgba(0, 212, 255, 0.15);
           border: 1px solid rgba(0, 212, 255, 0.3);
-          box-shadow: 0 0 12px rgba(0, 212, 255, 0.12), inset 0 0 8px rgba(0, 212, 255, 0.06);
+          box-shadow: 0 0 12px rgba(0, 212, 255, 0.12);
         }
         .nav-link-active:hover {
-          background: linear-gradient(135deg, rgba(0, 212, 255, 0.25), rgba(168, 85, 247, 0.25));
+          background: rgba(0, 212, 255, 0.2);
         }
 
         /* ===== ACTIONS ===== */
@@ -270,7 +285,6 @@ export default function Navbar() {
           border-color: var(--violet);
           color: var(--violet);
           background: rgba(168, 85, 247, 0.08);
-          box-shadow: 0 0 15px rgba(168, 85, 247, 0.12);
           transform: rotate(20deg);
         }
 
@@ -346,11 +360,6 @@ export default function Navbar() {
           transition: all 0.2s ease;
           text-decoration: none;
         }
-        .mobile-nav-icon {
-          font-size: 1.1rem;
-          width: 28px;
-          text-align: center;
-        }
         .mobile-nav-link:hover {
           color: var(--text-primary);
           background: var(--bg-glass-strong);
@@ -388,9 +397,6 @@ export default function Navbar() {
 
         /* ===== RESPONSIVE ===== */
         @media (max-width: 1050px) {
-          .nav-link-icon {
-            display: none;
-          }
           .nav-link {
             padding: 0.4rem 0.7rem;
             font-size: 0.8rem;

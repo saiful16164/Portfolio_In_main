@@ -3,48 +3,48 @@
 import { useEffect, useRef, useState } from "react";
 
 export default function SkillBar({
-    name,
-    proficiency,
-    color = "var(--gradient-main)",
+  name,
+  proficiency,
+  color = "var(--cyan)",
 }: {
-    name: string;
-    proficiency: number;
-    color?: string;
+  name: string;
+  proficiency: number;
+  color?: string;
 }) {
-    const barRef = useRef<HTMLDivElement>(null);
-    const [visible, setVisible] = useState(false);
+  const barRef = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
 
-    useEffect(() => {
-        const observer = new IntersectionObserver(
-            ([entry]) => {
-                if (entry.isIntersecting) {
-                    setVisible(true);
-                    observer.disconnect();
-                }
-            },
-            { threshold: 0.3 }
-        );
-        if (barRef.current) observer.observe(barRef.current);
-        return () => observer.disconnect();
-    }, []);
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.3 }
+    );
+    if (barRef.current) observer.observe(barRef.current);
+    return () => observer.disconnect();
+  }, []);
 
-    return (
-        <div className="skill-bar-wrapper" ref={barRef}>
-            <div className="skill-bar-header">
-                <span className="skill-name">{name}</span>
-                <span className="skill-pct">{proficiency}%</span>
-            </div>
-            <div className="skill-bar-track">
-                <div
-                    className="skill-bar-fill"
-                    style={{
-                        width: visible ? `${proficiency}%` : "0%",
-                        background: color,
-                    }}
-                />
-            </div>
+  return (
+    <div className="skill-bar-wrapper" ref={barRef}>
+      <div className="skill-bar-header">
+        <span className="skill-name">{name}</span>
+        <span className="skill-pct">{proficiency}%</span>
+      </div>
+      <div className="skill-bar-track">
+        <div
+          className="skill-bar-fill"
+          style={{
+            width: visible ? `${proficiency}%` : "0%",
+            background: color,
+          }}
+        />
+      </div>
 
-            <style jsx>{`
+      <style jsx>{`
         .skill-bar-wrapper {
           width: 100%;
         }
@@ -77,6 +77,6 @@ export default function SkillBar({
           transition: width 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
       `}</style>
-        </div>
-    );
+    </div>
+  );
 }
