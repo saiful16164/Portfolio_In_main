@@ -12,9 +12,8 @@ export default function Footer() {
         <div className="footer-top">
           <div className="footer-brand">
             <a href="#" className="footer-logo" onClick={() => typeof window !== "undefined" && window.scrollTo({ top: 0, behavior: "smooth" })}>
-              <span style={{ color: "var(--cyan)", fontFamily: "monospace" }}>&lt;</span>
-              <span style={{ color: "var(--cyan)", fontWeight: 700 }}>Saiful</span>
-              <span style={{ color: "var(--cyan)", fontFamily: "monospace" }}>/&gt;</span>
+              <span className="footer-logo-name">Saiful</span>
+              <span className="footer-logo-dot">.</span>
             </a>
             <p className="footer-tagline">
               Building the future, one line of code at a time.
@@ -71,41 +70,52 @@ export default function Footer() {
           margin-top: auto;
         }
         .footer-inner {
-          padding-top: 3rem;
+          padding-top: 3.5rem;
           padding-bottom: 1.5rem;
         }
         .footer-top {
           display: grid;
           grid-template-columns: 2fr 1fr 1fr;
           gap: 2rem;
-          margin-bottom: 2rem;
+          margin-bottom: 2.5rem;
         }
         .footer-logo {
-          font-size: 1.2rem;
+          font-family: var(--font-playfair, var(--font-heading));
+          font-size: 1.4rem;
           font-weight: 700;
           text-decoration: none;
           display: inline-flex;
-          gap: 2px;
+          gap: 0;
           cursor: pointer;
+          color: var(--text-primary);
+        }
+        .footer-logo-name {
+          color: var(--text-primary);
+        }
+        .footer-logo-dot {
+          color: var(--accent);
+          font-size: 1.8rem;
+          line-height: 1;
         }
         .footer-tagline {
-          margin-top: 0.75rem;
+          margin-top: 0.85rem;
           color: var(--text-muted);
           font-size: 0.9rem;
-          line-height: 1.5;
+          line-height: 1.6;
+          font-style: italic;
         }
         .footer-heading {
-          font-size: 0.85rem;
+          font-size: 0.82rem;
           font-weight: 600;
-          color: var(--text-primary);
-          margin-bottom: 0.75rem;
+          color: var(--accent);
+          margin-bottom: 0.85rem;
           text-transform: uppercase;
-          letter-spacing: 0.05em;
+          letter-spacing: 0.08em;
         }
         .footer-links-group {
           display: flex;
           flex-direction: column;
-          gap: 0.4rem;
+          gap: 0.45rem;
         }
         .footer-link {
           color: var(--text-secondary);
@@ -115,7 +125,7 @@ export default function Footer() {
           padding: 0.15rem 0;
         }
         .footer-link:hover {
-          color: var(--cyan);
+          color: var(--accent);
         }
         .footer-divider {
           height: 1px;
@@ -146,8 +156,9 @@ export default function Footer() {
           transition: all var(--transition-fast);
         }
         .back-to-top:hover {
-          color: var(--cyan);
-          border-color: var(--cyan);
+          color: var(--accent);
+          border-color: var(--accent);
+          box-shadow: 0 0 16px rgba(203, 180, 128, 0.1);
         }
         @media (max-width: 640px) {
           .footer-top {

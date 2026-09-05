@@ -89,8 +89,8 @@ export default function ContactForm() {
             gap: 1rem;
             padding: 1.25rem;
             margin-bottom: 1.5rem;
-            border: 1px solid rgba(16, 185, 129, 0.3);
-            background: rgba(16, 185, 129, 0.05);
+            border: 1px solid rgba(107, 158, 120, 0.3);
+            background: rgba(107, 158, 120, 0.05);
           }
           .success-icon {
             font-size: 1.5rem;
@@ -102,7 +102,7 @@ export default function ContactForm() {
             align-items: center;
             justify-content: center;
             border-radius: 50%;
-            background: rgba(16, 185, 129, 0.15);
+            background: rgba(107, 158, 120, 0.15);
           }
           .contact-form {
             padding: 2rem;
@@ -113,17 +113,17 @@ export default function ContactForm() {
           .form-group {
             display: flex;
             flex-direction: column;
-            gap: 0.4rem;
+            gap: 0.45rem;
           }
           .form-label {
-            font-size: 0.85rem;
+            font-size: 0.82rem;
             font-weight: 600;
             color: var(--text-secondary);
             text-transform: uppercase;
-            letter-spacing: 0.05em;
+            letter-spacing: 0.06em;
           }
           .form-input {
-            padding: 0.75rem 1rem;
+            padding: 0.8rem 1.1rem;
             font-size: 0.95rem;
             font-family: inherit;
             color: var(--text-primary);
@@ -134,8 +134,8 @@ export default function ContactForm() {
             outline: none;
           }
           .form-input:focus {
-            border-color: var(--cyan);
-            box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.1);
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(203, 180, 128, 0.08);
           }
           .form-input::placeholder {
             color: var(--text-muted);

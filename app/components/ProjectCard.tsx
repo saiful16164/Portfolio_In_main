@@ -52,19 +52,20 @@ export default function ProjectCard({ project }: { project: Project }) {
         }
         .project-image-area {
           position: relative;
-          padding: 2rem;
+          padding: 2.25rem;
           display: flex;
           align-items: center;
           justify-content: center;
-          background: rgba(0, 212, 255, 0.04);
+          background: rgba(203, 180, 128, 0.03);
           border-bottom: 1px solid var(--border-color);
           min-height: 140px;
         }
         .project-initial {
-          font-size: 3rem;
-          font-weight: 800;
-          color: var(--cyan);
-          opacity: 0.6;
+          font-family: var(--font-playfair, var(--font-heading));
+          font-size: 3.5rem;
+          font-weight: 700;
+          color: var(--accent);
+          opacity: 0.4;
         }
         .project-status-row {
           position: absolute;
@@ -82,40 +83,41 @@ export default function ProjectCard({ project }: { project: Project }) {
           letter-spacing: 0.04em;
         }
         .status-ongoing {
-          background: rgba(0, 212, 255, 0.1);
-          color: var(--cyan);
-          border: 1px solid rgba(0, 212, 255, 0.2);
+          background: rgba(203, 180, 128, 0.1);
+          color: var(--accent);
+          border: 1px solid rgba(203, 180, 128, 0.2);
         }
         .status-completed {
-          background: rgba(16, 185, 129, 0.1);
+          background: rgba(107, 158, 120, 0.1);
           color: var(--emerald);
-          border: 1px solid rgba(16, 185, 129, 0.2);
+          border: 1px solid rgba(107, 158, 120, 0.2);
         }
         .featured-badge {
           font-size: 0.7rem;
           font-weight: 600;
           padding: 0.2rem 0.6rem;
           border-radius: var(--radius-full);
-          background: rgba(168, 85, 247, 0.1);
-          color: var(--violet);
-          border: 1px solid rgba(168, 85, 247, 0.2);
+          background: rgba(139, 158, 114, 0.1);
+          color: var(--accent-secondary);
+          border: 1px solid rgba(139, 158, 114, 0.2);
         }
         .project-content {
-          padding: 1.25rem;
+          padding: 1.35rem;
           display: flex;
           flex-direction: column;
           gap: 0.75rem;
           flex: 1;
         }
         .project-title {
-          font-size: 1.15rem;
+          font-family: var(--font-playfair, var(--font-heading));
+          font-size: 1.2rem;
           font-weight: 700;
           color: var(--text-primary);
         }
         .project-desc {
           font-size: 0.88rem;
           color: var(--text-secondary);
-          line-height: 1.6;
+          line-height: 1.7;
           display: -webkit-box;
           -webkit-line-clamp: 3;
           -webkit-box-orient: vertical;
@@ -145,10 +147,10 @@ export default function ProjectCard({ project }: { project: Project }) {
           transition: color var(--transition-fast);
         }
         .project-link:hover {
-          color: var(--cyan);
+          color: var(--accent);
         }
         .project-link-demo:hover {
-          color: var(--violet);
+          color: var(--accent-secondary);
         }
       `}</style>
     </div>

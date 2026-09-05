@@ -48,9 +48,8 @@ export default function Navbar() {
       <div className="navbar-inner container">
         {/* Logo */}
         <a href="#" className="navbar-logo" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
-          <span className="logo-bracket">&lt;</span>
           <span className="logo-name">Saiful</span>
-          <span className="logo-bracket">/&gt;</span>
+          <span className="logo-dot">.</span>
         </a>
 
         {/* Desktop Links */}
@@ -143,24 +142,24 @@ export default function Navbar() {
           left: 0;
           right: 0;
           z-index: 100;
-          background: rgba(10, 10, 15, 0.6);
-          backdrop-filter: blur(16px);
-          -webkit-backdrop-filter: blur(16px);
+          background: rgba(7, 16, 11, 0.5);
+          backdrop-filter: blur(20px);
+          -webkit-backdrop-filter: blur(20px);
           border-bottom: 1px solid transparent;
-          transition: all 0.3s ease;
+          transition: all 0.4s ease;
         }
         .navbar-scrolled {
-          background: rgba(10, 10, 15, 0.85);
+          background: rgba(7, 16, 11, 0.88);
           border-bottom: 1px solid var(--border-color);
-          box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+          box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
         }
 
         /* Light theme overrides */
         :global([data-theme="light"]) .navbar {
-          background: rgba(250, 250, 250, 0.6);
+          background: rgba(248, 245, 240, 0.5);
         }
         :global([data-theme="light"]) .navbar-scrolled {
-          background: rgba(250, 250, 250, 0.88);
+          background: rgba(248, 245, 240, 0.9);
           box-shadow: 0 4px 30px rgba(0, 0, 0, 0.06);
         }
 
@@ -173,26 +172,28 @@ export default function Navbar() {
 
         /* ===== LOGO ===== */
         .navbar-logo {
-          font-size: 1.35rem;
+          font-family: var(--font-playfair, var(--font-heading));
+          font-size: 1.5rem;
           font-weight: 700;
           display: flex;
           align-items: center;
-          gap: 2px;
+          gap: 0;
           text-decoration: none;
           transition: transform 0.2s ease;
           flex-shrink: 0;
           cursor: pointer;
+          color: var(--text-primary);
         }
         .navbar-logo:hover {
           transform: scale(1.03);
         }
-        .logo-bracket {
-          color: var(--cyan);
-          font-family: var(--font-mono, monospace);
-          font-weight: 400;
+        .logo-dot {
+          color: var(--accent);
+          font-size: 2rem;
+          line-height: 1;
         }
         .logo-name {
-          color: var(--cyan);
+          color: var(--text-primary);
           font-weight: 700;
         }
 
@@ -200,7 +201,7 @@ export default function Navbar() {
         .navbar-links {
           display: flex;
           align-items: center;
-          gap: 0.5rem;
+          gap: 0.35rem;
           background: var(--bg-glass);
           border: 1px solid var(--border-color);
           border-radius: var(--radius-full);
@@ -225,15 +226,15 @@ export default function Navbar() {
           background: var(--bg-glass-strong);
         }
 
-        /* Active link — solid accent pill */
+        /* Active link — warm gold pill */
         .nav-link-active {
-          color: #fff;
-          background: rgba(0, 212, 255, 0.15);
-          border: 1px solid rgba(0, 212, 255, 0.3);
-          box-shadow: 0 0 12px rgba(0, 212, 255, 0.12);
+          color: var(--accent);
+          background: rgba(203, 180, 128, 0.1);
+          border: 1px solid rgba(203, 180, 128, 0.2);
+          box-shadow: 0 0 12px rgba(203, 180, 128, 0.08);
         }
         .nav-link-active:hover {
-          background: rgba(0, 212, 255, 0.2);
+          background: rgba(203, 180, 128, 0.15);
         }
 
         /* ===== ACTIONS ===== */
@@ -252,18 +253,18 @@ export default function Navbar() {
           padding: 0.45rem 1.1rem;
           font-size: 0.82rem;
           font-weight: 600;
-          color: var(--cyan);
-          border: 1px solid rgba(0, 212, 255, 0.3);
+          color: var(--accent);
+          border: 1px solid rgba(203, 180, 128, 0.25);
           border-radius: var(--radius-full);
-          background: rgba(0, 212, 255, 0.06);
+          background: rgba(203, 180, 128, 0.06);
           text-decoration: none;
           transition: all 0.25s ease;
           white-space: nowrap;
         }
         .resume-btn:hover {
-          background: rgba(0, 212, 255, 0.12);
-          border-color: rgba(0, 212, 255, 0.5);
-          box-shadow: 0 0 20px rgba(0, 212, 255, 0.15);
+          background: rgba(203, 180, 128, 0.12);
+          border-color: rgba(203, 180, 128, 0.4);
+          box-shadow: 0 0 20px rgba(203, 180, 128, 0.12);
           transform: translateY(-1px);
         }
 
@@ -282,9 +283,9 @@ export default function Navbar() {
           transition: all 0.25s ease;
         }
         .theme-toggle:hover {
-          border-color: var(--violet);
-          color: var(--violet);
-          background: rgba(168, 85, 247, 0.08);
+          border-color: var(--accent);
+          color: var(--accent);
+          background: rgba(203, 180, 128, 0.08);
           transform: rotate(20deg);
         }
 
@@ -366,9 +367,9 @@ export default function Navbar() {
           padding-left: 1.25rem;
         }
         .mobile-nav-link-active {
-          color: var(--cyan);
-          background: rgba(0, 212, 255, 0.06);
-          border-left: 3px solid var(--cyan);
+          color: var(--accent);
+          background: rgba(203, 180, 128, 0.06);
+          border-left: 3px solid var(--accent);
         }
         .mobile-menu-divider {
           height: 1px;
@@ -383,16 +384,16 @@ export default function Navbar() {
           padding: 0.85rem 1rem;
           font-size: 0.95rem;
           font-weight: 600;
-          color: var(--cyan);
-          background: rgba(0, 212, 255, 0.06);
-          border: 1px solid rgba(0, 212, 255, 0.2);
+          color: var(--accent);
+          background: rgba(203, 180, 128, 0.06);
+          border: 1px solid rgba(203, 180, 128, 0.15);
           border-radius: var(--radius-sm);
           text-decoration: none;
           transition: all 0.2s ease;
         }
         .mobile-resume-btn:hover {
-          background: rgba(0, 212, 255, 0.12);
-          border-color: rgba(0, 212, 255, 0.4);
+          background: rgba(203, 180, 128, 0.12);
+          border-color: rgba(203, 180, 128, 0.3);
         }
 
         /* ===== RESPONSIVE ===== */

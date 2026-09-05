@@ -44,7 +44,7 @@ export default function HomePage() {
     .map(s => ({ id: s.id, name: s.name, category: s.category as Skill["category"], proficiency: s.proficiency }));
 
   const categories = ["Programming Languages", "Technologies", "Tools"] as const;
-  const categoryColors: Record<string, string> = { "Programming Languages": "var(--cyan)", Technologies: "var(--violet)", Tools: "var(--pink)" };
+  const categoryColors: Record<string, string> = { "Programming Languages": "var(--accent)", Technologies: "var(--accent-secondary)", Tools: "var(--rose)" };
 
   const achievements: Achievement[] = portfolioData.achievements.map((a, i) => ({
     id: a.id || `ach-${i}`, title: a.title, description: a.description || "",
@@ -87,6 +87,8 @@ export default function HomePage() {
     <>
       {/* ===== HERO SECTION ===== */}
       <section id="hero" className="hero">
+        {/* Ambient background glow */}
+        <div className="hero-ambient" />
         <div className="container hero-container">
           <div className="hero-content animate-fade-in-up">
             <div className="hero-badge badge">Welcome to my portfolio</div>
@@ -118,7 +120,7 @@ export default function HomePage() {
                 <img src={profileImage} alt={personalInfo.name} className="hero-profile-img" />
               ) : (
                 <div className="hero-placeholder">
-                  <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" strokeWidth="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></svg>
+                  <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></svg>
                 </div>
               )}
             </div>
@@ -149,10 +151,10 @@ export default function HomePage() {
 
           <div className="about-intro glass-card animate-fade-in-up">
             <div className="about-intro-text">
-              <h3 style={{ fontSize: "1.4rem", fontWeight: 700, marginBottom: "0.75rem" }}>
+              <h3 style={{ fontFamily: "var(--font-playfair, var(--font-heading))", fontSize: "1.5rem", fontWeight: 700, marginBottom: "0.75rem" }}>
                 <span className="accent-text">{personalInfo.name}</span>
               </h3>
-              <p style={{ color: "var(--text-secondary)", lineHeight: 1.7, fontSize: "0.95rem" }}>
+              <p style={{ color: "var(--text-secondary)", lineHeight: 1.8, fontSize: "0.95rem" }}>
                 {personalInfo.personalStory}
               </p>
             </div>
@@ -172,7 +174,7 @@ export default function HomePage() {
                     <p className="timeline-sub">{edu.institution}</p>
                     <span className="badge" style={{ marginTop: "0.5rem" }}>{edu.year}</span>
                     {edu.details && (
-                      <p style={{ color: "var(--text-muted)", fontSize: "0.88rem", marginTop: "0.5rem", lineHeight: 1.6 }}>
+                      <p style={{ color: "var(--text-muted)", fontSize: "0.88rem", marginTop: "0.5rem", lineHeight: 1.7 }}>
                         {edu.details}
                       </p>
                     )}
@@ -187,8 +189,8 @@ export default function HomePage() {
             <h3 className="about-section-title">
               <span className="accent-text">Career Goals</span>
             </h3>
-            <div className="glass-card" style={{ padding: "1.5rem" }}>
-              <p style={{ color: "var(--text-secondary)", lineHeight: 1.7, fontSize: "0.95rem" }}>
+            <div className="glass-card" style={{ padding: "1.75rem" }}>
+              <p style={{ color: "var(--text-secondary)", lineHeight: 1.8, fontSize: "0.95rem" }}>
                 {personalInfo.careerGoals}
               </p>
             </div>
@@ -202,7 +204,7 @@ export default function HomePage() {
             <div className="interests-grid">
               {personalInfo.technicalInterests.map((interest, i) => (
                 <div key={i} className="interest-card glass-card">
-                  <span className="interest-bullet">&#9657;</span>
+                  <span className="interest-bullet">&#9671;</span>
                   <span>{interest}</span>
                 </div>
               ))}
@@ -227,7 +229,7 @@ export default function HomePage() {
                 return (
                   <div key={category} className="skill-category-section animate-fade-in-up" style={{ animationDelay: `${catIdx * 0.2}s` }}>
                     <h3 className="category-title"><span className="accent-text">{category}</span></h3>
-                    <div className="skill-bars-grid glass-card" style={{ padding: "1.5rem" }}>
+                    <div className="skill-bars-grid glass-card" style={{ padding: "1.75rem" }}>
                       {categorySkills.map((skill: Skill) => (
                         <SkillBar key={skill.id} name={skill.name} proficiency={skill.proficiency} color={categoryColors[category]} />
                       ))}
@@ -378,7 +380,7 @@ export default function HomePage() {
               ) : (
                 <div className="resume-placeholder">
                   <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" strokeWidth="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /><line x1="16" y1="13" x2="8" y2="13" /><line x1="16" y1="17" x2="8" y2="17" /></svg>
-                  <h3 style={{ fontSize: "1.2rem", fontWeight: 700, marginTop: "1rem" }}>
+                  <h3 style={{ fontFamily: "var(--font-playfair, var(--font-heading))", fontSize: "1.2rem", fontWeight: 700, marginTop: "1rem" }}>
                     <span className="accent-text">Resume Not Available</span>
                   </h3>
                   <p style={{ color: "var(--text-secondary)", fontSize: "0.9rem", marginTop: "0.5rem" }}>
@@ -417,7 +419,7 @@ export default function HomePage() {
             <div className="contact-sidebar animate-fade-in-up delay-200">
               <div className="contact-info-card glass-card">
                 <div className="contact-info-icon-wrap">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" /><polyline points="22,6 12,13 2,6" /></svg>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" /><polyline points="22,6 12,13 2,6" /></svg>
                 </div>
                 <div>
                   <h4 className="contact-info-label">Email</h4>
@@ -426,7 +428,7 @@ export default function HomePage() {
               </div>
               <div className="contact-info-card glass-card">
                 <div className="contact-info-icon-wrap">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" /><circle cx="12" cy="10" r="3" /></svg>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" /><circle cx="12" cy="10" r="3" /></svg>
                 </div>
                 <div>
                   <h4 className="contact-info-label">Location</h4>
@@ -454,17 +456,29 @@ export default function HomePage() {
       <style jsx>{`
         /* ===== HERO ===== */
         .hero { position: relative; padding: 5rem 0 3rem; overflow: hidden; min-height: calc(100vh - 70px); display: flex; align-items: center; }
-        .hero-container { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 3rem; align-items: center; }
+        .hero-ambient {
+          position: absolute;
+          top: -30%;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 800px;
+          height: 800px;
+          background: radial-gradient(circle, rgba(203, 180, 128, 0.06) 0%, rgba(139, 158, 114, 0.03) 40%, transparent 70%);
+          pointer-events: none;
+          z-index: 0;
+          animation: subtleGlow 8s ease-in-out infinite;
+        }
+        .hero-container { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 3rem; align-items: center; position: relative; z-index: 1; }
         .hero-badge { margin-bottom: 1.25rem; font-size: 0.85rem; color: var(--text-secondary); width: fit-content; }
-        .hero-name { font-size: 3.5rem; font-weight: 800; letter-spacing: -0.04em; line-height: 1.15; margin-bottom: 0.75rem; }
+        .hero-name { font-family: var(--font-playfair, var(--font-heading)); font-size: 3.5rem; font-weight: 700; letter-spacing: -0.02em; line-height: 1.15; margin-bottom: 0.75rem; }
         .hero-title { font-size: 1.15rem; color: var(--text-secondary); margin-bottom: 1rem; font-weight: 500; }
-        .hero-bio { font-size: 1rem; color: var(--text-muted); line-height: 1.7; max-width: 520px; margin-bottom: 1.75rem; }
+        .hero-bio { font-size: 1rem; color: var(--text-muted); line-height: 1.8; max-width: 520px; margin-bottom: 1.75rem; }
         .hero-actions { display: flex; gap: 1rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
         .hero-socials { display: flex; gap: 0.75rem; }
-        .social-link { display: flex; align-items: center; justify-content: center; width: 42px; height: 42px; border-radius: var(--radius-sm); border: 1px solid var(--border-color); color: var(--text-secondary); transition: all var(--transition-fast); }
-        .social-link:hover { color: var(--cyan); border-color: var(--cyan); background: rgba(0, 212, 255, 0.05); transform: translateY(-2px); }
+        .social-link { display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: var(--radius-sm); border: 1px solid var(--border-color); color: var(--text-secondary); transition: all var(--transition-fast); }
+        .social-link:hover { color: var(--accent); border-color: var(--accent); background: rgba(203, 180, 128, 0.05); transform: translateY(-2px); }
         .hero-visual { position: relative; display: flex; align-items: center; justify-content: center; max-width: 400px; margin: 0 auto; }
-        .hero-img-wrapper { width: 300px; height: 300px; border-radius: 50%; padding: 4px; border: 3px solid var(--cyan); box-shadow: 0 0 40px rgba(0, 212, 255, 0.1); overflow: hidden; }
+        .hero-img-wrapper { width: 300px; height: 300px; border-radius: 50%; padding: 4px; border: 3px solid var(--accent); box-shadow: 0 0 50px rgba(203, 180, 128, 0.1); overflow: hidden; }
         .hero-profile-img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; display: block; }
         .hero-placeholder { width: 100%; height: 100%; border-radius: 50%; background: var(--bg-primary); display: flex; align-items: center; justify-content: center; }
 
@@ -472,27 +486,27 @@ export default function HomePage() {
         .stats-section { padding: 0 1.5rem 3rem; margin-top: -1rem; }
         .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
         .stat-card { padding: 1.5rem; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 0.3rem; }
-        .stat-value { font-size: 1.75rem; font-weight: 800; color: var(--text-primary); font-variant-numeric: tabular-nums; }
-        .stat-label { font-size: 0.85rem; color: var(--text-muted); font-weight: 500; }
+        .stat-value { font-family: var(--font-playfair, var(--font-heading)); font-size: 1.85rem; font-weight: 700; color: var(--accent); font-variant-numeric: tabular-nums; }
+        .stat-label { font-size: 0.85rem; color: var(--text-muted); font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; }
 
         /* ===== ABOUT ===== */
         .about-container { max-width: 800px; }
         .about-intro { display: flex; gap: 1.5rem; padding: 2rem; align-items: flex-start; margin-bottom: 2.5rem; }
         .about-section { margin-bottom: 2.5rem; }
-        .about-section-title { font-size: 1.3rem; font-weight: 700; margin-bottom: 1rem; }
+        .about-section-title { font-family: var(--font-playfair, var(--font-heading)); font-size: 1.4rem; font-weight: 700; margin-bottom: 1rem; }
         .timeline { display: flex; flex-direction: column; gap: 1rem; position: relative; padding-left: 1.5rem; }
-        .timeline::before { content: ""; position: absolute; left: 6px; top: 0; bottom: 0; width: 2px; background: var(--cyan); border-radius: 2px; }
+        .timeline::before { content: ""; position: absolute; left: 6px; top: 0; bottom: 0; width: 2px; background: var(--accent); border-radius: 2px; opacity: 0.4; }
         .timeline-item { position: relative; padding: 1.25rem 1.5rem; }
-        .timeline-dot { position: absolute; left: -1.75rem; top: 1.5rem; width: 14px; height: 14px; border-radius: 50%; background: var(--cyan); border: 3px solid var(--bg-primary); }
-        .timeline-heading { font-size: 1.05rem; font-weight: 700; color: var(--text-primary); }
+        .timeline-dot { position: absolute; left: -1.75rem; top: 1.5rem; width: 14px; height: 14px; border-radius: 50%; background: var(--accent); border: 3px solid var(--bg-primary); }
+        .timeline-heading { font-family: var(--font-playfair, var(--font-heading)); font-size: 1.1rem; font-weight: 700; color: var(--text-primary); }
         .timeline-sub { font-size: 0.9rem; color: var(--text-secondary); margin-top: 0.2rem; }
         .interests-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 0.75rem; }
         .interest-card { display: flex; align-items: center; gap: 0.75rem; padding: 1rem 1.25rem; font-size: 0.93rem; font-weight: 500; color: var(--text-secondary); }
-        .interest-bullet { color: var(--cyan); font-size: 1.1rem; }
+        .interest-bullet { color: var(--accent); font-size: 0.9rem; }
 
         /* ===== SKILLS ===== */
         .skills-categories { display: flex; flex-direction: column; gap: 2.5rem; }
-        .category-title { display: flex; align-items: center; gap: 0.6rem; font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem; }
+        .category-title { font-family: var(--font-playfair, var(--font-heading)); display: flex; align-items: center; gap: 0.6rem; font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem; }
         .skill-bars-grid { display: flex; flex-direction: column; gap: 1.25rem; }
 
         /* ===== PROJECTS ===== */
@@ -500,11 +514,11 @@ export default function HomePage() {
         .filter-categories { display: flex; flex-wrap: wrap; gap: 0.4rem; }
         .filter-btn { padding: 0.45rem 1rem; font-size: 0.85rem; font-weight: 500; border: 1px solid var(--border-color); border-radius: var(--radius-full); background: var(--bg-glass); color: var(--text-secondary); cursor: pointer; transition: all var(--transition-fast); }
         .filter-btn:hover { border-color: var(--border-hover); color: var(--text-primary); }
-        .filter-btn-active { background: rgba(0, 212, 255, 0.1); border-color: var(--cyan); color: var(--cyan); }
+        .filter-btn-active { background: rgba(203, 180, 128, 0.1); border-color: var(--accent); color: var(--accent); }
         .search-wrapper { position: relative; }
         .search-icon { position: absolute; left: 0.75rem; top: 50%; transform: translateY(-50%); color: var(--text-muted); }
         .search-input { padding: 0.55rem 1rem 0.55rem 2.25rem; font-size: 0.88rem; font-family: inherit; color: var(--text-primary); background: var(--bg-glass); border: 1px solid var(--border-color); border-radius: var(--radius-full); outline: none; min-width: 220px; transition: all var(--transition-fast); }
-        .search-input:focus { border-color: var(--cyan); box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.1); }
+        .search-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(203, 180, 128, 0.08); }
         .search-input::placeholder { color: var(--text-muted); }
         .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 1.5rem; }
         .empty-state { text-align: center; padding: 4rem 1rem; color: var(--text-muted); display: flex; flex-direction: column; align-items: center; gap: 1rem; }
@@ -514,20 +528,20 @@ export default function HomePage() {
         .research-card { padding: 1.75rem; }
         .research-status-row { margin-bottom: 0.75rem; }
         .research-status { display: inline-flex; align-items: center; gap: 0.3rem; padding: 0.3rem 0.8rem; font-size: 0.78rem; font-weight: 600; border-radius: var(--radius-full); background: var(--bg-glass-strong); border: 1px solid var(--border-color); }
-        .research-title { font-size: 1.2rem; font-weight: 700; color: var(--text-primary); line-height: 1.4; margin-bottom: 0.3rem; }
-        .research-venue { font-size: 0.88rem; color: var(--cyan); font-weight: 500; font-style: italic; margin-bottom: 0.75rem; }
-        .research-abstract { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.7; margin-bottom: 1rem; }
+        .research-title { font-family: var(--font-playfair, var(--font-heading)); font-size: 1.25rem; font-weight: 700; color: var(--text-primary); line-height: 1.4; margin-bottom: 0.3rem; }
+        .research-venue { font-size: 0.88rem; color: var(--accent); font-weight: 500; font-style: italic; margin-bottom: 0.75rem; }
+        .research-abstract { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.8; margin-bottom: 1rem; }
         .research-links { display: flex; gap: 0.75rem; flex-wrap: wrap; }
 
         /* ===== ACHIEVEMENTS ===== */
         .achievements-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); gap: 1.5rem; }
         .achievement-card { padding: 1.5rem; display: flex; flex-direction: column; gap: 0.75rem; }
         .achievement-header { display: flex; align-items: center; gap: 0.75rem; }
-        .achievement-title { font-size: 1.1rem; font-weight: 700; color: var(--text-primary); }
-        .achievement-desc { font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6; }
+        .achievement-title { font-family: var(--font-playfair, var(--font-heading)); font-size: 1.15rem; font-weight: 700; color: var(--text-primary); }
+        .achievement-desc { font-size: 0.88rem; color: var(--text-secondary); line-height: 1.7; }
         .achievement-footer { display: flex; align-items: center; justify-content: space-between; margin-top: auto; padding-top: 0.75rem; border-top: 1px solid var(--border-color); }
         .achievement-date { font-size: 0.82rem; color: var(--text-muted); }
-        .achievement-link { font-size: 0.82rem; font-weight: 600; color: var(--cyan); text-decoration: none; transition: opacity var(--transition-fast); }
+        .achievement-link { font-size: 0.82rem; font-weight: 600; color: var(--accent); text-decoration: none; transition: opacity var(--transition-fast); }
         .achievement-link:hover { opacity: 0.8; }
 
         /* ===== BLOG ===== */
@@ -535,11 +549,11 @@ export default function HomePage() {
         .blog-card { padding: 1.75rem; display: flex; flex-direction: column; gap: 0.6rem; cursor: pointer; }
         .blog-meta { display: flex; align-items: center; gap: 0.5rem; font-size: 0.82rem; color: var(--text-muted); }
         .blog-dot { font-size: 0.6rem; }
-        .blog-title { font-size: 1.2rem; font-weight: 700; color: var(--text-primary); line-height: 1.3; }
-        .blog-excerpt { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; }
+        .blog-title { font-family: var(--font-playfair, var(--font-heading)); font-size: 1.25rem; font-weight: 700; color: var(--text-primary); line-height: 1.3; }
+        .blog-excerpt { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.7; }
         .blog-tags { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.25rem; }
         .blog-read-more { margin-top: 0.5rem; }
-        .read-more-link { font-size: 0.88rem; font-weight: 600; color: var(--cyan); transition: opacity var(--transition-fast); }
+        .read-more-link { font-size: 0.88rem; font-weight: 600; color: var(--accent); transition: opacity var(--transition-fast); }
         .blog-card:hover .read-more-link { opacity: 0.8; }
 
         /* ===== RESUME ===== */
@@ -554,13 +568,13 @@ export default function HomePage() {
         .contact-sidebar { display: flex; flex-direction: column; gap: 1rem; }
         .contact-info-card { display: flex; align-items: center; gap: 1rem; padding: 1.25rem; }
         .contact-info-icon-wrap { min-width: 40px; text-align: center; }
-        .contact-info-label { font-size: 0.78rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+        .contact-info-label { font-size: 0.78rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; }
         .contact-info-value { font-size: 0.95rem; color: var(--text-primary); text-decoration: none; transition: color var(--transition-fast); }
-        a.contact-info-value:hover { color: var(--cyan); }
+        a.contact-info-value:hover { color: var(--accent); }
         .contact-social-card { padding: 1.25rem; }
         .contact-social-links { display: flex; flex-direction: column; gap: 0.5rem; }
         .contact-social-link { display: flex; align-items: center; gap: 0.6rem; padding: 0.5rem 0.75rem; font-size: 0.9rem; font-weight: 500; color: var(--text-secondary); text-decoration: none; border-radius: var(--radius-sm); transition: all var(--transition-fast); }
-        .contact-social-link:hover { color: var(--cyan); background: var(--bg-glass-strong); }
+        .contact-social-link:hover { color: var(--accent); background: var(--bg-glass-strong); }
 
         /* ===== RESPONSIVE ===== */
         @media (max-width: 768px) {

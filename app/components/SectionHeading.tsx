@@ -12,14 +12,16 @@ export default function SectionHeading({
   return (
     <div className={`section-heading ${align === "center" ? "section-heading-center" : ""}`}>
       <h2 className="section-title">
-        <span className="accent-text">{title}</span>
+        {title}
       </h2>
       {subtitle && <p className="section-subtitle">{subtitle}</p>}
-      <div className="section-underline" />
+      <div className="section-underline">
+        <span className="underline-dot" />
+      </div>
 
       <style jsx>{`
         .section-heading {
-          margin-bottom: 3rem;
+          margin-bottom: 3.5rem;
         }
         .section-heading-center {
           text-align: center;
@@ -28,28 +30,44 @@ export default function SectionHeading({
           align-items: center;
         }
         .section-title {
-          font-size: 2.2rem;
-          font-weight: 800;
-          letter-spacing: -0.03em;
+          font-family: var(--font-playfair, var(--font-heading));
+          font-size: 2.5rem;
+          font-weight: 700;
+          letter-spacing: -0.02em;
           line-height: 1.2;
+          color: var(--text-primary);
         }
         .section-subtitle {
-          margin-top: 0.75rem;
+          margin-top: 0.85rem;
           color: var(--text-secondary);
           font-size: 1.05rem;
           max-width: 550px;
-          line-height: 1.6;
+          line-height: 1.7;
         }
         .section-underline {
-          margin-top: 1rem;
-          width: 60px;
-          height: 3px;
-          border-radius: 3px;
-          background: var(--cyan);
+          margin-top: 1.25rem;
+          display: flex;
+          align-items: center;
+          gap: 6px;
+        }
+        .section-underline::before,
+        .section-underline::after {
+          content: "";
+          width: 28px;
+          height: 1.5px;
+          background: var(--accent);
+          border-radius: 2px;
+          opacity: 0.5;
+        }
+        .underline-dot {
+          width: 6px;
+          height: 6px;
+          border-radius: 50%;
+          background: var(--accent);
         }
         @media (max-width: 640px) {
           .section-title {
-            font-size: 1.7rem;
+            font-size: 1.9rem;
           }
         }
       `}</style>

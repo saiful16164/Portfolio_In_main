@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 export default function SkillBar({
   name,
   proficiency,
-  color = "var(--cyan)",
+  color = "var(--accent)",
 }: {
   name: string;
   proficiency: number;
@@ -39,7 +39,7 @@ export default function SkillBar({
           className="skill-bar-fill"
           style={{
             width: visible ? `${proficiency}%` : "0%",
-            background: color,
+            background: `linear-gradient(90deg, ${color}, ${color}dd)`,
           }}
         />
       </div>
@@ -51,7 +51,7 @@ export default function SkillBar({
         .skill-bar-header {
           display: flex;
           justify-content: space-between;
-          margin-bottom: 0.4rem;
+          margin-bottom: 0.5rem;
         }
         .skill-name {
           font-size: 0.9rem;
@@ -66,7 +66,7 @@ export default function SkillBar({
         }
         .skill-bar-track {
           width: 100%;
-          height: 8px;
+          height: 6px;
           background: var(--bg-glass-strong);
           border-radius: var(--radius-full);
           overflow: hidden;
@@ -74,7 +74,8 @@ export default function SkillBar({
         .skill-bar-fill {
           height: 100%;
           border-radius: var(--radius-full);
-          transition: width 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+          transition: width 1.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+          box-shadow: 0 0 8px rgba(203, 180, 128, 0.15);
         }
       `}</style>
     </div>
