@@ -2,34 +2,35 @@
 
 /* ===== DESIGN TOKENS — Rasa-Inspired Earthy Dark ===== */
 :root {
-  /* Primary Accent Palette */
-  --accent: #CBB480;
-  --accent-light: #E0CFA0;
-  --accent-dark: #A89460;
-  --accent-secondary: #8B9E72;
-  --emerald: #6B9E78;
+  /* Primary Accent Palette (Rasa Authentic) */
+  --accent: #C5A059;
+  --accent-light: #DFBE7D;
+  --accent-dark: #A8843E;
+  --accent-secondary: #10B981;
+  --emerald: #10B981;
+  --emerald-light: #6EE7B7;
   --rose: #C48B7A;
 
-  /* Dark Theme (Default) */
-  --bg-primary: #07100B;
-  --bg-secondary: #0C1610;
-  --bg-card: rgba(15, 28, 20, 0.6);
-  --bg-card-hover: rgba(20, 38, 28, 0.75);
-  --bg-glass: rgba(15, 28, 20, 0.5);
-  --bg-glass-strong: rgba(20, 38, 28, 0.65);
+  /* Dark Theme (Default) - Deep Forest / Moss Green */
+  --bg-primary: #0B1D15;
+  --bg-secondary: #0F261D;
+  --bg-card: rgba(26, 46, 38, 0.82);
+  --bg-card-hover: rgba(33, 62, 50, 0.95);
+  --bg-glass: rgba(22, 42, 34, 0.72);
+  --bg-glass-strong: rgba(26, 48, 38, 0.9);
 
-  --text-primary: #F0F4F0;
-  --text-secondary: #9EB0A2;
-  --text-muted: #5A6E5E;
+  --text-primary: #F5F5F0;
+  --text-secondary: #A3B8AD;
+  --text-muted: #6F887B;
 
-  --border-color: rgba(139, 158, 114, 0.12);
-  --border-hover: rgba(203, 180, 128, 0.25);
+  --border-color: #1F3630;
+  --border-hover: rgba(197, 160, 89, 0.45);
 
-  /* Shadows */
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
-  --shadow-md: 0 4px 24px rgba(0, 0, 0, 0.5);
-  --shadow-lg: 0 8px 48px rgba(0, 0, 0, 0.6);
-  --shadow-glow: 0 0 40px rgba(203, 180, 128, 0.08);
+  /* Shadows with deep forest green tint */
+  --shadow-sm: 0 2px 8px rgba(4, 14, 9, 0.5);
+  --shadow-md: 0 4px 24px rgba(4, 14, 9, 0.6);
+  --shadow-lg: 0 8px 48px rgba(4, 14, 9, 0.7);
+  --shadow-glow: 0 0 40px rgba(16, 185, 129, 0.15);
 
   /* Spacing */
   --section-padding: 6rem 1.5rem;
@@ -66,16 +67,16 @@
   --text-muted: #8A9E8E;
 
   --border-color: rgba(0, 0, 0, 0.08);
-  --border-hover: rgba(203, 180, 128, 0.3);
+  --border-hover: rgba(197, 160, 89, 0.35);
 
   --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
   --shadow-md: 0 4px 24px rgba(0, 0, 0, 0.08);
   --shadow-lg: 0 8px 48px rgba(0, 0, 0, 0.1);
-  --shadow-glow: 0 0 40px rgba(203, 180, 128, 0.12);
+  --shadow-glow: 0 0 40px rgba(197, 160, 89, 0.12);
 
-  --accent: #A89460;
-  --accent-light: #CBB480;
-  --accent-dark: #8A7A50;
+  --accent: #A8843E;
+  --accent-light: #C5A059;
+  --accent-dark: #8A6E30;
 }
 
 /* ===== TAILWIND THEME ===== */
@@ -99,12 +100,22 @@ html {
 }
 
 body {
-  background: var(--bg-primary);
+  background-color: var(--bg-primary);
+  background-image:
+    radial-gradient(ellipse 90% 50% at 50% -10%, rgba(16, 185, 129, 0.14), transparent 70%),
+    radial-gradient(ellipse 60% 40% at 100% 30%, rgba(16, 185, 129, 0.09), transparent 60%),
+    radial-gradient(ellipse 70% 50% at 0% 70%, rgba(20, 60, 42, 0.45), transparent 70%),
+    radial-gradient(ellipse 80% 50% at 50% 100%, rgba(16, 185, 129, 0.12), transparent 60%);
+  background-attachment: fixed;
   color: var(--text-primary);
   font-family: var(--font-body);
   line-height: 1.7;
   overflow-x: hidden;
   min-height: 100vh;
+}
+
+[data-theme="light"] body {
+  background-image: none;
 }
 
 /* Subtle noise texture overlay */
@@ -114,13 +125,13 @@ body::before {
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  opacity: 0.02;
+  opacity: 0.025;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
 }
 
 /* Selection */
 ::selection {
-  background: rgba(203, 180, 128, 0.3);
+  background: rgba(197, 160, 89, 0.3);
   color: var(--text-primary);
 }
 
@@ -134,12 +145,12 @@ body::before {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(139, 158, 114, 0.2);
+  background: rgba(16, 185, 129, 0.25);
   border-radius: var(--radius-full);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(203, 180, 128, 0.3);
+  background: rgba(197, 160, 89, 0.4);
 }
 
 /* ===== UTILITY CLASSES ===== */
@@ -164,7 +175,7 @@ body::before {
   color: var(--accent);
 }
 
-/* Glassmorphism Card — Organic */
+/* Glassmorphism Card — Organic Forest Green */
 .glass-card {
   background: var(--bg-glass);
   backdrop-filter: blur(24px);
@@ -188,7 +199,7 @@ body::before {
   gap: 0.5rem;
   padding: 0.8rem 1.8rem;
   background: var(--accent);
-  color: #0A1A0E;
+  color: #0B1D15;
   font-weight: 600;
   font-size: 0.95rem;
   border: none;
@@ -203,8 +214,8 @@ body::before {
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 30px rgba(203, 180, 128, 0.3);
-  filter: brightness(1.1);
+  box-shadow: 0 4px 30px rgba(197, 160, 89, 0.35);
+  filter: brightness(1.08);
 }
 
 .btn-outline {
@@ -212,11 +223,11 @@ body::before {
   align-items: center;
   gap: 0.5rem;
   padding: 0.8rem 1.8rem;
-  background: transparent;
+  background: rgba(26, 46, 38, 0.5);
   color: var(--text-primary);
   font-weight: 600;
   font-size: 0.95rem;
-  border: 1px solid var(--border-color);
+  border: 1px solid rgba(16, 185, 129, 0.3);
   border-radius: var(--radius-full);
   cursor: pointer;
   transition: all var(--transition-base);
@@ -227,8 +238,9 @@ body::before {
 .btn-outline:hover {
   border-color: var(--accent);
   color: var(--accent);
+  background: rgba(197, 160, 89, 0.1);
   transform: translateY(-2px);
-  box-shadow: 0 0 24px rgba(203, 180, 128, 0.1);
+  box-shadow: 0 0 24px rgba(197, 160, 89, 0.15);
 }
 
 /* Badge/Tag — Organic */
@@ -241,33 +253,36 @@ body::before {
   border-radius: var(--radius-full);
   background: var(--bg-glass-strong);
   color: var(--accent);
-  border: 1px solid rgba(203, 180, 128, 0.15);
+  border: 1px solid rgba(197, 160, 89, 0.22);
   transition: all var(--transition-fast);
 }
 
 .badge:hover {
-  background: rgba(203, 180, 128, 0.1);
-  border-color: rgba(203, 180, 128, 0.3);
+  background: rgba(197, 160, 89, 0.12);
+  border-color: rgba(197, 160, 89, 0.4);
 }
 
 .badge-violet {
-  color: var(--accent-secondary);
-  border-color: rgba(139, 158, 114, 0.2);
+  color: var(--emerald-light);
+  border-color: rgba(16, 185, 129, 0.25);
+  background: rgba(16, 185, 129, 0.1);
 }
 
 .badge-violet:hover {
-  background: rgba(139, 158, 114, 0.1);
-  border-color: rgba(139, 158, 114, 0.4);
+  background: rgba(16, 185, 129, 0.2);
+  border-color: rgba(110, 231, 183, 0.4);
 }
 
 .badge-pink {
   color: var(--rose);
-  border-color: rgba(196, 139, 122, 0.2);
+  border-color: rgba(196, 139, 122, 0.25);
+  background: rgba(196, 139, 122, 0.1);
 }
 
 .badge-emerald {
   color: var(--emerald);
-  border-color: rgba(107, 158, 120, 0.2);
+  border-color: rgba(16, 185, 129, 0.3);
+  background: rgba(16, 185, 129, 0.12);
 }
 
 /* ===== KEYFRAME ANIMATIONS ===== */

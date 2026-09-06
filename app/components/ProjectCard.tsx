@@ -56,7 +56,7 @@ export default function ProjectCard({ project }: { project: Project }) {
           display: flex;
           align-items: center;
           justify-content: center;
-          background: rgba(203, 180, 128, 0.03);
+          background: linear-gradient(180deg, rgba(16, 185, 129, 0.08) 0%, rgba(26, 46, 38, 0.5) 100%);
           border-bottom: 1px solid var(--border-color);
           min-height: 140px;
         }
@@ -65,7 +65,7 @@ export default function ProjectCard({ project }: { project: Project }) {
           font-size: 3.5rem;
           font-weight: 700;
           color: var(--accent);
-          opacity: 0.4;
+          opacity: 0.5;
         }
         .project-status-row {
           position: absolute;
@@ -83,23 +83,23 @@ export default function ProjectCard({ project }: { project: Project }) {
           letter-spacing: 0.04em;
         }
         .status-ongoing {
-          background: rgba(203, 180, 128, 0.1);
+          background: rgba(197, 160, 89, 0.12);
           color: var(--accent);
-          border: 1px solid rgba(203, 180, 128, 0.2);
+          border: 1px solid rgba(197, 160, 89, 0.25);
         }
         .status-completed {
-          background: rgba(107, 158, 120, 0.1);
+          background: rgba(16, 185, 129, 0.15);
           color: var(--emerald);
-          border: 1px solid rgba(107, 158, 120, 0.2);
+          border: 1px solid rgba(16, 185, 129, 0.3);
         }
         .featured-badge {
           font-size: 0.7rem;
           font-weight: 600;
           padding: 0.2rem 0.6rem;
           border-radius: var(--radius-full);
-          background: rgba(139, 158, 114, 0.1);
-          color: var(--accent-secondary);
-          border: 1px solid rgba(139, 158, 114, 0.2);
+          background: rgba(197, 160, 89, 0.15);
+          color: var(--accent);
+          border: 1px solid rgba(197, 160, 89, 0.3);
         }
         .project-content {
           padding: 1.35rem;

@@ -158,7 +158,7 @@ export default function Footer() {
         .back-to-top:hover {
           color: var(--accent);
           border-color: var(--accent);
-          box-shadow: 0 0 16px rgba(203, 180, 128, 0.1);
+          box-shadow: 0 0 16px rgba(197, 160, 89, 0.15);
         }
         @media (max-width: 640px) {
           .footer-top {

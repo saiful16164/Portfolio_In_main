@@ -89,8 +89,8 @@ export default function ContactForm() {
             gap: 1rem;
             padding: 1.25rem;
             margin-bottom: 1.5rem;
-            border: 1px solid rgba(107, 158, 120, 0.3);
-            background: rgba(107, 158, 120, 0.05);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            background: rgba(16, 185, 129, 0.08);
           }
           .success-icon {
             font-size: 1.5rem;
@@ -102,7 +102,7 @@ export default function ContactForm() {
             align-items: center;
             justify-content: center;
             border-radius: 50%;
-            background: rgba(107, 158, 120, 0.15);
+            background: rgba(16, 185, 129, 0.2);
           }
           .contact-form {
             padding: 2rem;
@@ -135,7 +135,7 @@ export default function ContactForm() {
           }
           .form-input:focus {
             border-color: var(--accent);
-            box-shadow: 0 0 0 3px rgba(203, 180, 128, 0.08);
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
           }
           .form-input::placeholder {
             color: var(--text-muted);
