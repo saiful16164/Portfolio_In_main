@@ -1,22 +1,43 @@
 "use client";
 
 import { useState, Suspense } from "react";
-import { personalInfo, Project, projectCategories } from "@/app/data";
+import { personalInfo, Project } from "@/app/data";
 import ProjectCard from "@/app/components/ProjectCard";
 import ProjectModal from "@/app/components/ProjectModal";
 import SectionHeading from "@/app/components/SectionHeading";
 import SkillCard from "@/app/components/SkillCard";
+import EventCard from "@/app/components/EventCard";
 import ContactForm from "@/app/components/ContactForm";
 import portfolioData from "@/app/data/portfolio-data.json";
 
 interface Skill { id: string; name: string; category: "Programming Languages" | "Technologies" | "Tools"; proficiency?: number; }
-interface Achievement { id: string; title: string; description: string; type: "Competition" | "Hackathon" | "Award" | "Certification"; date: string; link: string; }
-interface Research { id: string; title: string; abstract: string; publicationName: string; pdfLink: string; doiLink: string; status: "Published" | "Under Review" | "In Progress"; }
+interface EventItem {
+  id: string;
+  title: string;
+  description: string;
+  type: "Conference" | "Hackathon" | "Competition" | "Workshop" | "Meetup" | "Award" | "Certification";
+  date: string;
+  link: string;
+  location?: string;
+  images?: string[];
+}
+type Achievement = EventItem;
+interface Research {
+  id: string;
+  title: string;
+  abstract: string;
+  publicationName: string;
+  pdfLink: string;
+  doiLink: string;
+  status: "Published" | "Under Review" | "In Progress" | "Accepted";
+  authors?: string[];
+  date?: string;
+  location?: string;
+  tags?: string[];
+}
 interface BlogPost { id: string; title: string; excerpt: string; content: string; tags: string[]; status: "Published" | "Draft"; readTime: string; createdAt: string; }
 
 export default function HomePage() {
-  const [activeCategory, setActiveCategory] = useState("All");
-  const [searchQuery, setSearchQuery] = useState("");
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   const profileImage = portfolioData.siteSettings.profileImage || personalInfo.profileImage;
@@ -44,14 +65,6 @@ export default function HomePage() {
       role: p.role,
     }));
 
-  const filteredProjects = allProjects.filter((project: Project) => {
-    const matchesCategory = activeCategory === "All" || project.tags.includes(activeCategory);
-    const matchesSearch = searchQuery === "" ||
-      project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      project.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      project.technologies.some((t: string) => t.toLowerCase().includes(searchQuery.toLowerCase()));
-    return matchesCategory && matchesSearch;
-  });
 
   const allSkills: Skill[] = portfolioData.skills
     .sort((a, b) => a.sortOrder - b.sortOrder)
@@ -60,22 +73,42 @@ export default function HomePage() {
   const categories = ["Programming Languages", "Technologies", "Tools"] as const;
   const categoryColors: Record<string, string> = { "Programming Languages": "var(--accent)", Technologies: "var(--accent-secondary)", Tools: "var(--rose)" };
 
-  const achievements: Achievement[] = portfolioData.achievements.map((a, i) => ({
-    id: a.id || `ach-${i}`, title: a.title, description: a.description || "",
-    type: a.type as Achievement["type"], date: a.date || "", link: a.link || "",
+  const rawEvents = (portfolioData.events || (portfolioData as Record<string, unknown>).achievements || []) as Array<Record<string, unknown>>;
+  const events: EventItem[] = rawEvents.map((e, i) => ({
+    id: (e.id as string) || `event-${i}`,
+    title: (e.title as string) || "",
+    description: (e.description as string) || "",
+    type: (e.type as EventItem["type"]) || "Conference",
+    date: (e.date as string) || "",
+    link: (e.link as string) || "",
+    location: (e.location as string) || "",
+    images: (e.images as string[]) || [],
   }));
 
-  const typeColors: Record<string, string> = { Competition: "badge", Hackathon: "badge badge-violet", Award: "badge badge-pink", Certification: "badge badge-emerald" };
+  const typeColors: Record<string, string> = {
+    Conference: "badge badge-emerald",
+    Hackathon: "badge badge-violet",
+    Competition: "badge",
+    Workshop: "badge badge-pink",
+    Meetup: "badge",
+    Award: "badge badge-emerald",
+    Certification: "badge badge-emerald",
+  };
 
   const research: Research[] = portfolioData.research.map((r, i) => {
     const item = r as Record<string, unknown>;
     return {
-      id: (item.id as string) || `res-${i}`, title: (item.title as string) || "",
+      id: (item.id as string) || `res-${i}`,
+      title: (item.title as string) || "",
       abstract: (item.abstract as string) || "",
       publicationName: (item.publicationName as string) || "",
       pdfLink: (item.pdfLink as string) || "",
       doiLink: (item.doiLink as string) || "",
-      status: (item.status as Research["status"]) || "In Progress",
+      status: (item.status as Research["status"]) || "Accepted",
+      authors: (item.authors as string[]) || [],
+      date: (item.date as string) || "",
+      location: (item.location as string) || "",
+      tags: (item.tags as string[]) || [],
     };
   });
 
@@ -94,7 +127,7 @@ export default function HomePage() {
     { label: "Projects", value: portfolioData.projects.length },
     { label: "Skills", value: portfolioData.skills.length },
     { label: "Research", value: portfolioData.research.length },
-    { label: "Achievements", value: portfolioData.achievements.length },
+    { label: "Events", value: events.length },
   ];
 
   return (
@@ -227,6 +260,114 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ===== RESEARCH SECTION ===== */}
+      <section id="research" className="section">
+        <div className="container" style={{ maxWidth: "960px" }}>
+          <SectionHeading title="Research" />
+          {research.length === 0 ? (
+            <div style={{ textAlign: "center", padding: "3rem", color: "var(--text-muted)" }}>
+              <p>No research added yet.</p>
+            </div>
+          ) : (
+            <div className="research-list">
+              {research.map((paper: Research, i: number) => (
+                <article key={paper.id} className="research-card glass-card animate-fade-in-up" style={{ animationDelay: `${i * 0.15}s` }}>
+                  <div className="research-card-header">
+                    <h3 className="research-title">{paper.title}</h3>
+                    <span className="research-status-badge">
+                      <span className="status-dot"></span>
+                      {paper.status}
+                    </span>
+                  </div>
+
+                  {paper.authors && paper.authors.length > 0 && (
+                    <p className="research-authors">
+                      {paper.authors.map((author, idx) => {
+                        const isSaiful = author.toLowerCase().includes("saiful");
+                        return (
+                          <span key={idx}>
+                            <span className={isSaiful ? "research-author-highlight" : ""}>{author}</span>
+                            {idx < paper.authors!.length - 1 ? ", " : ""}
+                          </span>
+                        );
+                      })}
+                    </p>
+                  )}
+
+                  <div className="research-meta-row">
+                    {paper.date && (
+                      <span className="research-meta-item">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" /><line x1="16" y1="2" x2="16" y2="6" /><line x1="8" y1="2" x2="8" y2="6" /><line x1="3" y1="10" x2="21" y2="10" /></svg>
+                        {paper.date}
+                      </span>
+                    )}
+                    {paper.date && paper.publicationName && <span className="meta-sep">•</span>}
+                    <span className="research-venue-pill">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" /><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" /></svg>
+                      {paper.publicationName}
+                    </span>
+                    {paper.location && (
+                      <>
+                        <span className="meta-sep">•</span>
+                        <span className="research-meta-item">
+                          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" /><circle cx="12" cy="10" r="3" /></svg>
+                          {paper.location}
+                        </span>
+                      </>
+                    )}
+                  </div>
+
+                  <p className="research-abstract">{paper.abstract}</p>
+
+                  <div className="research-footer">
+                    <div className="research-tags">
+                      {paper.tags?.map((tag) => (
+                        <span key={tag} className="research-tag">#{tag}</span>
+                      ))}
+                    </div>
+                    <div className="research-actions">
+                      {paper.doiLink && (
+                        <a href={paper.doiLink} target="_blank" rel="noopener noreferrer" className="research-doi-btn" aria-label={`View DOI for ${paper.title}`}>
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" /><polyline points="15 3 21 3 21 9" /><line x1="10" y1="14" x2="21" y2="3" /></svg>
+                          <span>IEEE Xplore / DOI</span>
+                        </a>
+                      )}
+                      {paper.pdfLink && (
+                        <a href={paper.pdfLink} target="_blank" rel="noopener noreferrer" className="btn-outline" style={{ padding: "0.45rem 1rem", fontSize: "0.82rem" }}>Download PDF</a>
+                      )}
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* ===== PROJECTS SECTION ===== */}
+      <section id="projects" className="section">
+        <div className="container">
+          <SectionHeading title="Projects" subtitle="A collection of work I'm proud of — from mobile apps to AI models" />
+
+          {allProjects.length === 0 ? (
+            <div className="empty-state">
+              <p>No projects added yet.</p>
+            </div>
+          ) : (
+            <div className="projects-grid">
+              {allProjects.map((project: Project, i: number) => (
+                <div key={project.id} className="animate-fade-in-up" style={{ animationDelay: `${i * 0.1}s` }}>
+                  <ProjectCard
+                    project={project}
+                    onClick={() => setSelectedProject(project)}
+                  />
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      </section>
+
       {/* ===== SKILLS SECTION ===== */}
       <section id="skills" className="section">
         <div className="container" style={{ maxWidth: "1000px" }}>
@@ -259,102 +400,22 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ===== PROJECTS SECTION ===== */}
-      <section id="projects" className="section">
-        <div className="container">
-          <SectionHeading title="Projects" subtitle="A collection of work I'm proud of — from mobile apps to AI models" />
-
-          <div className="filter-bar">
-            <div className="filter-categories">
-              {projectCategories.map((cat: string) => (
-                <button key={cat} onClick={() => setActiveCategory(cat)} className={`filter-btn ${activeCategory === cat ? "filter-btn-active" : ""}`}>{cat}</button>
-              ))}
-            </div>
-            <div className="search-wrapper">
-              <svg className="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8" /><path d="m21 21-4.35-4.35" /></svg>
-              <input type="text" placeholder="Search projects..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className="search-input" />
-            </div>
-          </div>
-
-          {filteredProjects.length === 0 ? (
-            <div className="empty-state">
-              <p>{allProjects.length === 0 ? "No projects added yet." : "No projects match your filter."}</p>
-            </div>
-          ) : (
-            <div className="projects-grid">
-              {filteredProjects.map((project: Project, i: number) => (
-                <div key={project.id} className="animate-fade-in-up" style={{ animationDelay: `${i * 0.1}s` }}>
-                  <ProjectCard
-                    project={project}
-                    onClick={() => setSelectedProject(project)}
-                  />
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-      </section>
-
-      {/* ===== RESEARCH SECTION ===== */}
-      <section id="research" className="section">
-        <div className="container" style={{ maxWidth: "900px" }}>
-          <SectionHeading title="Research" subtitle="Academic publications and ongoing research projects" />
-          {research.length === 0 ? (
+      {/* ===== EVENTS SECTION ===== */}
+      <section id="events" className="section">
+        <div className="container" style={{ maxWidth: "1000px" }}>
+          <SectionHeading title="Events" subtitle="Conferences, technical symposiums, and community presentations" />
+          {events.length === 0 ? (
             <div style={{ textAlign: "center", padding: "3rem", color: "var(--text-muted)" }}>
-              <p>No research added yet.</p>
+              <p>No events added yet.</p>
             </div>
           ) : (
-            <div className="research-list">
-              {research.map((paper: Research, i: number) => (
-                <div key={paper.id} className="research-card glass-card animate-fade-in-up" style={{ animationDelay: `${i * 0.15}s` }}>
-                  <div className="research-status-row">
-                    <span className={`research-status ${paper.status === "Published" ? "badge-emerald" : paper.status === "Under Review" ? "badge-violet" : "badge"}`}>
-                      {paper.status}
-                    </span>
-                  </div>
-                  <h3 className="research-title">{paper.title}</h3>
-                  <p className="research-venue">{paper.publicationName}</p>
-                  <p className="research-abstract">{paper.abstract}</p>
-                  <div className="research-links">
-                    {paper.doiLink && (
-                      <a href={paper.doiLink} target="_blank" rel="noopener noreferrer" className="btn-outline" style={{ padding: "0.4rem 1rem", fontSize: "0.82rem" }}>
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" /><polyline points="15 3 21 3 21 9" /><line x1="10" y1="14" x2="21" y2="3" /></svg>
-                        DOI / Reference
-                      </a>
-                    )}
-                    {paper.pdfLink && (
-                      <a href={paper.pdfLink} target="_blank" rel="noopener noreferrer" className="btn-outline" style={{ padding: "0.4rem 1rem", fontSize: "0.82rem" }}>Download PDF</a>
-                    )}
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-      </section>
-
-      {/* ===== ACHIEVEMENTS SECTION ===== */}
-      <section id="achievements" className="section">
-        <div className="container" style={{ maxWidth: "900px" }}>
-          <SectionHeading title="Achievements" subtitle="Competitions, hackathons, and certifications" />
-          {achievements.length === 0 ? (
-            <div style={{ textAlign: "center", padding: "3rem", color: "var(--text-muted)" }}>
-              <p>No achievements added yet.</p>
-            </div>
-          ) : (
-            <div className="achievements-grid">
-              {achievements.map((achievement: Achievement, i: number) => (
-                <div key={achievement.id} className="achievement-card glass-card animate-fade-in-up" style={{ animationDelay: `${i * 0.12}s` }}>
-                  <div className="achievement-header">
-                    <span className={typeColors[achievement.type] || "badge"}>{achievement.type}</span>
-                  </div>
-                  <h3 className="achievement-title">{achievement.title}</h3>
-                  <p className="achievement-desc">{achievement.description}</p>
-                  <div className="achievement-footer">
-                    {achievement.date && <span className="achievement-date">{achievement.date}</span>}
-                    {achievement.link && <a href={achievement.link} target="_blank" rel="noopener noreferrer" className="achievement-link">View Certificate &rarr;</a>}
-                  </div>
-                </div>
+            <div className="events-stack-list">
+              {events.map((event: EventItem) => (
+                <EventCard
+                  key={event.id}
+                  event={event}
+                  typeColors={typeColors}
+                />
               ))}
             </div>
           )}
@@ -555,25 +616,142 @@ export default function HomePage() {
         .empty-state { text-align: center; padding: 4rem 1rem; color: var(--text-muted); display: flex; flex-direction: column; align-items: center; gap: 1rem; }
 
         /* ===== RESEARCH ===== */
-        .research-list { display: flex; flex-direction: column; gap: 1.5rem; }
-        .research-card { padding: 1.75rem; }
-        .research-status-row { margin-bottom: 0.75rem; }
-        .research-status { display: inline-flex; align-items: center; gap: 0.3rem; padding: 0.3rem 0.8rem; font-size: 0.78rem; font-weight: 600; border-radius: var(--radius-full); background: var(--bg-glass-strong); border: 1px solid var(--border-color); }
-        .research-title { font-family: var(--font-playfair, var(--font-heading)); font-size: 1.25rem; font-weight: 700; color: var(--text-primary); line-height: 1.4; margin-bottom: 0.3rem; }
-        .research-venue { font-size: 0.88rem; color: var(--accent); font-weight: 500; font-style: italic; margin-bottom: 0.75rem; }
-        .research-abstract { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.8; margin-bottom: 1rem; }
-        .research-links { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+        .research-list { display: flex; flex-direction: column; gap: 1.75rem; }
+        .research-card { 
+          position: relative; 
+          padding: 2.25rem 2rem; 
+          border-radius: var(--radius-lg); 
+          transition: transform var(--transition-normal), border-color var(--transition-normal), box-shadow var(--transition-normal); 
+        }
+        .research-card:hover { 
+          transform: translateY(-3px); 
+          border-color: rgba(16, 185, 129, 0.4); 
+          box-shadow: 0 12px 36px rgba(0, 0, 0, 0.3), 0 0 25px rgba(16, 185, 129, 0.08); 
+        }
+        .research-card-header { 
+          display: flex; 
+          align-items: flex-start; 
+          justify-content: space-between; 
+          gap: 1.25rem; 
+          margin-bottom: 0.85rem; 
+        }
+        .research-title { 
+          font-family: var(--font-playfair, Georgia, serif); 
+          font-size: 1.35rem; 
+          font-weight: 700; 
+          color: var(--text-primary); 
+          line-height: 1.4; 
+          letter-spacing: -0.01em; 
+          flex: 1; 
+        }
+        .research-status-badge { 
+          display: inline-flex; 
+          align-items: center; 
+          gap: 0.45rem; 
+          padding: 0.3rem 0.85rem; 
+          font-size: 0.72rem; 
+          font-weight: 700; 
+          letter-spacing: 0.12em; 
+          text-transform: uppercase; 
+          border-radius: var(--radius-full); 
+          border: 1px solid rgba(16, 185, 129, 0.4); 
+          background: rgba(16, 185, 129, 0.12); 
+          color: #34D399; 
+          white-space: nowrap; 
+          flex-shrink: 0; 
+        }
+        .status-dot { width: 6px; height: 6px; border-radius: 50%; background: #34D399; box-shadow: 0 0 8px #34D399; }
+        .research-authors { 
+          font-size: 0.95rem; 
+          color: var(--text-secondary); 
+          line-height: 1.6; 
+          margin-bottom: 0.75rem; 
+        }
+        .research-author-highlight { 
+          color: var(--accent); 
+          font-weight: 700; 
+          text-decoration: underline; 
+          text-underline-offset: 3px; 
+          text-decoration-color: rgba(16, 185, 129, 0.45); 
+        }
+        .research-meta-row { 
+          display: flex; 
+          align-items: center; 
+          gap: 0.65rem; 
+          flex-wrap: wrap; 
+          font-size: 0.86rem; 
+          color: var(--text-muted); 
+          margin-bottom: 1.15rem; 
+        }
+        .research-meta-item { display: inline-flex; align-items: center; gap: 0.35rem; }
+        .meta-sep { color: var(--border-color); font-size: 0.8rem; }
+        .research-venue-pill { 
+          display: inline-flex; 
+          align-items: center; 
+          gap: 0.4rem; 
+          color: var(--accent); 
+          font-weight: 600; 
+        }
+        .research-abstract { 
+          font-size: 0.91rem; 
+          color: var(--text-secondary); 
+          line-height: 1.8; 
+          margin-bottom: 1.35rem; 
+        }
+        .research-footer { 
+          display: flex; 
+          align-items: center; 
+          justify-content: space-between; 
+          flex-wrap: wrap; 
+          gap: 1rem; 
+          padding-top: 1.15rem; 
+          border-top: 1px solid rgba(255, 255, 255, 0.07); 
+        }
+        .research-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+        .research-tag { 
+          font-size: 0.75rem; 
+          padding: 0.2rem 0.65rem; 
+          border-radius: var(--radius-sm); 
+          background: rgba(255, 255, 255, 0.04); 
+          border: 1px solid var(--border-color); 
+          color: var(--text-muted); 
+        }
+        .research-actions { display: flex; gap: 0.75rem; align-items: center; }
+        .research-doi-btn { 
+          display: inline-flex; 
+          align-items: center; 
+          gap: 0.45rem; 
+          padding: 0.45rem 1.05rem; 
+          font-size: 0.82rem; 
+          font-weight: 600; 
+          border-radius: var(--radius-md); 
+          background: rgba(16, 185, 129, 0.12); 
+          border: 1px solid rgba(16, 185, 129, 0.38); 
+          color: #34D399; 
+          text-decoration: none; 
+          transition: all var(--transition-fast); 
+        }
+        .research-doi-btn:hover { 
+          background: rgba(16, 185, 129, 0.22); 
+          border-color: #10B981; 
+          color: #ffffff; 
+          transform: translateY(-1px); 
+          box-shadow: 0 4px 14px rgba(16, 185, 129, 0.2); 
+        }
 
-        /* ===== ACHIEVEMENTS ===== */
-        .achievements-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); gap: 1.5rem; }
-        .achievement-card { padding: 1.5rem; display: flex; flex-direction: column; gap: 0.75rem; }
-        .achievement-header { display: flex; align-items: center; gap: 0.75rem; }
-        .achievement-title { font-family: var(--font-playfair, var(--font-heading)); font-size: 1.15rem; font-weight: 700; color: var(--text-primary); }
-        .achievement-desc { font-size: 0.88rem; color: var(--text-secondary); line-height: 1.7; }
-        .achievement-footer { display: flex; align-items: center; justify-content: space-between; margin-top: auto; padding-top: 0.75rem; border-top: 1px solid var(--border-color); }
-        .achievement-date { font-size: 0.82rem; color: var(--text-muted); }
-        .achievement-link { font-size: 0.82rem; font-weight: 600; color: var(--accent); text-decoration: none; transition: opacity var(--transition-fast); }
-        .achievement-link:hover { opacity: 0.8; }
+        /* ===== EVENTS ===== */
+        .events-stack-list { display: flex; flex-direction: column; gap: 2.25rem; }
+        .events-grid, .achievements-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); gap: 1.5rem; }
+        .event-card, .achievement-card { padding: 1.75rem; display: flex; flex-direction: column; gap: 0.75rem; border-radius: var(--radius-lg); transition: transform var(--transition-normal), border-color var(--transition-normal), box-shadow var(--transition-normal); }
+        .event-card:hover, .achievement-card:hover { transform: translateY(-3px); border-color: rgba(16, 185, 129, 0.4); box-shadow: 0 12px 36px rgba(0, 0, 0, 0.3); }
+        .event-header, .achievement-header { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; }
+        .event-location { font-size: 0.8rem; color: var(--text-muted); display: inline-flex; align-items: center; gap: 0.3rem; }
+        .event-title, .achievement-title { font-family: var(--font-playfair, var(--font-heading)); font-size: 1.18rem; font-weight: 700; color: var(--text-primary); line-height: 1.35; }
+        .event-desc, .achievement-desc { font-size: 0.88rem; color: var(--text-secondary); line-height: 1.7; }
+        .event-footer, .achievement-footer { display: flex; align-items: center; justify-content: space-between; margin-top: auto; padding-top: 0.75rem; border-top: 1px solid var(--border-color); }
+        .event-date, .achievement-date { font-size: 0.82rem; color: var(--text-muted); }
+        .event-link, .achievement-link { font-size: 0.82rem; font-weight: 600; color: var(--accent); text-decoration: none; transition: opacity var(--transition-fast); }
+        .event-link:hover, .achievement-link:hover { opacity: 0.8; }
 
         /* ===== BLOG ===== */
         .blog-grid { display: flex; flex-direction: column; gap: 1.5rem; }

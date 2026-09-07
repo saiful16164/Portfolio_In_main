@@ -145,12 +145,54 @@
     ],
     "research": [
         {
-            "id": "1",
-            "title": "Sample Research Paper",
-            "publicationName": "",
+            "id": "leaf-disease-yolov11-diffusion",
+            "title": "Deep Learning-Driven Leaf Disease Classification in Indoor Plants with YOLOv11: Stable Diffusion Augmentation Approach",
+            "publicationName": "2025 28th International Conference on Computer and Information Technology (ICCIT 2025)",
+            "authors": [
+                "Nishad Mahmud Opu",
+                "Md Saiful Islam",
+                "Sayed Hanzala Abdullah",
+                "Ruma Akter"
+            ],
+            "date": "December 2025",
+            "location": "Cox's Bazar, Bangladesh",
+            "doiLink": "https://doi.org/10.1109/ICCIT68739.2025.11491324",
             "pdfLink": "",
-            "doiLink": "",
-            "status": "In Progress"
+            "status": "Accepted",
+            "abstract": "Proposes an automated deep learning framework for classifying foliar diseases in indoor plants (Money Plant, Snake Plant, and Spider Plant) using the YOLOv11 architecture. To tackle extreme data scarcity in indoor botanical pathology, a novel hybrid data augmentation pipeline was developed combining traditional geometric and photometric transformations (Albumentations) with synthetic realistic image generation using Stable Diffusion v1.5 image-to-image synthesis, achieving notable classification accuracy gains.",
+            "tags": [
+                "YOLOv11",
+                "Stable Diffusion",
+                "Deep Learning",
+                "Computer Vision",
+                "Plant Pathology"
+            ]
+        },
+        {
+            "id": "leaf-disease-comparative-yolo",
+            "title": "Deep Learning-Based Leaf Diseases Detection in Indoor Ornamental Plants: A Comparative Study of YOLOv8, YOLOv9, and YOLOv11",
+            "publicationName": "2025 IEEE International Women in Engineering (WIE) Conference on Electrical and Computer Engineering (WIECON-ECE 2025)",
+            "authors": [
+                "Nishad Mahmud Opu",
+                "Md Saiful Islam",
+                "Ruma Akter",
+                "Kazi Maisha Jannath",
+                "Shahriar Ahmed",
+                "Rakibul Islam Rafi"
+            ],
+            "date": "December 2025",
+            "location": "Bangladesh",
+            "doiLink": "https://doi.org/10.1109/WIECON-ECE69386.2025.11526313",
+            "pdfLink": "",
+            "status": "Accepted",
+            "abstract": "A comprehensive comparative study and empirical benchmark evaluating state-of-the-art real-time object detection models—YOLOv8, YOLOv9, and YOLOv11—for detecting and localizing leaf diseases in indoor ornamental plants. Analyzes trade-offs across mean Average Precision (mAP@0.5 and mAP@0.5:0.95), inference speed, parameter efficiency, and edge deployment suitability under variable lighting conditions.",
+            "tags": [
+                "YOLOv11",
+                "YOLOv9",
+                "YOLOv8",
+                "Object Detection",
+                "Comparative Study"
+            ]
         }
     ],
     "skills": [
@@ -172,14 +214,50 @@
         { "id": "16", "name": "Git & GitHub", "category": "Tools", "sortOrder": 0 },
         { "id": "17", "name": "VS Code", "category": "Tools", "sortOrder": 1 }
     ],
-    "achievements": [
+    "events": [
         {
-            "id": "1",
-            "title": "Sample Achievement",
-            "description": "This is a placeholder. Update with your actual achievements.",
+            "id": "ieee-conferences-2025",
+            "title": "Attending ICCIT & IEEE WIECON-ECE Conferences & Presenting Papers",
+            "description": "Presented research papers at the 2025 28th International Conference on Computer and Information Technology (ICCIT) and 2025 IEEE WIECON-ECE held in Cox's Bazar, showcasing work on deep learning and generative models.",
+            "type": "Conference",
+            "date": "December 2025",
+            "location": "Cox's Bazar, Bangladesh",
+            "link": "https://doi.org/10.1109/ICCIT68739.2025.11491324",
+            "images": [
+                "/events/ieee-conferences-2025/photo_1.jpeg",
+                "/events/ieee-conferences-2025/photo_2.jpeg",
+                "/events/ieee-conferences-2025/photo_3.jpeg",
+                "/events/ieee-conferences-2025/photo_4.jpeg",
+                "/events/ieee-conferences-2025/photo_5.jpeg"
+            ]
+        },
+        {
+            "id": "leading-university-iupc",
+            "title": "Leading University Junior IUPC 2024",
+            "description": "Represented Sylhet Engineering College at the Leading University Junior Inter-University Programming Camp & Contest (IUPC), tackling complex algorithmic and data structure problem sets.",
             "type": "Competition",
-            "date": "2025",
-            "link": ""
+            "date": "2024",
+            "location": "Leading University, Sylhet",
+            "link": "",
+            "images": [
+                "/events/leading-university-iupc/photo_1.jpeg",
+                "/events/leading-university-iupc/photo_2.jpeg"
+            ]
+        },
+        {
+            "id": "sust-hackathon",
+            "title": "SUST Hackathon 2024",
+            "description": "Collaborated in an intensive sprint environment at the Shahjalal University of Science and Technology (SUST) Hackathon, architecting and pitching innovative software solutions.",
+            "type": "Hackathon",
+            "date": "2024",
+            "location": "SUST, Sylhet",
+            "link": "",
+            "images": [
+                "/events/sust-hackathon/photo_1.jpeg",
+                "/events/sust-hackathon/photo_2.jpeg",
+                "/events/sust-hackathon/photo_3.jpeg",
+                "/events/sust-hackathon/photo_4.jpeg"
+            ]
         }
     ],
     "blogPosts": [

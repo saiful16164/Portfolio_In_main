@@ -30,7 +30,11 @@ export interface Research {
   publicationName: string;
   pdfLink?: string;
   doiLink?: string;
-  status: "Published" | "Under Review" | "In Progress";
+  status: "Accepted" | "Published" | "Under Review" | "In Progress";
+  authors?: string[];
+  date?: string;
+  location?: string;
+  tags?: string[];
 }
 
 export interface Skill {
@@ -41,14 +45,19 @@ export interface Skill {
   icon?: string;
 }
 
-export interface Achievement {
+export interface EventItem {
   id: string;
   title: string;
   description: string;
-  type: "Competition" | "Hackathon" | "Award" | "Certification";
+  type: "Conference" | "Hackathon" | "Competition" | "Workshop" | "Meetup" | "Award" | "Certification";
   date?: string;
   link?: string;
+  location?: string;
+  images?: string[];
+  highlights?: string[];
 }
+
+export type Achievement = EventItem;
 
 export interface BlogPost {
   id: string;
@@ -132,10 +141,10 @@ export const personalInfo: PersonalInfo = {
 export const navLinks = [
   { label: "Home", href: "#hero" },
   { label: "About", href: "#about" },
-  { label: "Projects", href: "#projects" },
   { label: "Research", href: "#research" },
+  { label: "Projects", href: "#projects" },
   { label: "Skills", href: "#skills" },
-  { label: "Achievements", href: "#achievements" },
+  { label: "Events", href: "#events" },
   { label: "Blog", href: "#blog" },
   { label: "Contact", href: "#contact" },
 ];
