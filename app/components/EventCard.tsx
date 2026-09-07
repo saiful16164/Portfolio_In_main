@@ -1,17 +1,34 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { EventItem } from "@/app/data";
 
 interface EventCardProps {
   event: EventItem;
   typeColors: Record<string, string>;
+  autoSlideInterval?: number;
 }
 
-export default function EventCard({ event, typeColors }: EventCardProps) {
+export default function EventCard({
+  event,
+  typeColors,
+  autoSlideInterval = 3500,
+}: EventCardProps) {
   const [currentIdx, setCurrentIdx] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
   const images = event.images || [];
   const hasImages = images.length > 0;
+
+  // Auto-slide effect when there are multiple images
+  useEffect(() => {
+    if (!hasImages || images.length <= 1 || isPaused) return;
+
+    const timer = setInterval(() => {
+      setCurrentIdx((prev) => (prev + 1) % images.length);
+    }, autoSlideInterval);
+
+    return () => clearInterval(timer);
+  }, [hasImages, images.length, isPaused, autoSlideInterval]);
 
   const nextImage = () => {
     if (images.length <= 1) return;
@@ -28,8 +45,15 @@ export default function EventCard({ event, typeColors }: EventCardProps) {
       {/* Left Column: Image Slider / Visual Showcase */}
       <div className="event-visual-col">
         {hasImages ? (
-          <div className="event-slider-wrapper">
+          <div
+            className="event-slider-wrapper"
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
+            onTouchStart={() => setIsPaused(true)}
+            onTouchEnd={() => setIsPaused(false)}
+          >
             <img
+              key={currentIdx}
               src={images[currentIdx]}
               alt={`${event.title} photo ${currentIdx + 1}`}
               className="event-slide-img"
@@ -178,11 +202,21 @@ export default function EventCard({ event, typeColors }: EventCardProps) {
           background: #0d1410;
         }
 
+        @keyframes slideFadeIn {
+          from {
+            opacity: 0.78;
+          }
+          to {
+            opacity: 1;
+          }
+        }
+
         .event-slide-img {
           width: 100%;
           height: 100%;
           object-fit: cover;
           display: block;
+          animation: slideFadeIn 0.4s ease-out;
           transition: transform 0.4s ease;
         }
 

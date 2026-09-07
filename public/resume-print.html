@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Saiful Islam - Resume</title>
+  <style>
+    @page {
+      size: letter;
+      margin: 0.35in 0.45in 0.35in 0.45in;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    html, body {
+      background: #ffffff;
+      color: #0f172a;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.28;
+      font-size: 8.8pt;
+    }
+    a {
+      color: #0f766e;
+      text-decoration: none;
+    }
+    .header {
+      text-align: center;
+      margin-bottom: 6px;
+    }
+    .header h1 {
+      font-size: 17pt;
+      font-weight: 800;
+      letter-spacing: 0.6px;
+      color: #0f172a;
+      text-transform: uppercase;
+      margin-bottom: 2px;
+    }
+    .header .subtitle {
+      font-size: 9pt;
+      font-weight: 600;
+      color: #0f766e;
+      margin-bottom: 3px;
+    }
+    .header .contact-row {
+      font-size: 8.4pt;
+      color: #334155;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+    }
+    .header .contact-row span {
+      display: inline-flex;
+      align-items: center;
+    }
+    .section-title {
+      font-size: 9.8pt;
+      font-weight: 700;
+      color: #0f172a;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      border-bottom: 1.2px solid #0f766e;
+      padding-bottom: 1px;
+      margin-top: 6px;
+      margin-bottom: 4px;
+    }
+    .item {
+      margin-bottom: 3.5px;
+    }
+    .item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      font-size: 8.8pt;
+    }
+    .item-title {
+      font-weight: 700;
+      color: #0f172a;
+    }
+    .item-subtitle {
+      font-weight: 600;
+      color: #334155;
+    }
+    .item-date {
+      font-size: 8.2pt;
+      font-weight: 600;
+      color: #64748b;
+      white-space: nowrap;
+    }
+    .item-location {
+      font-size: 8.2pt;
+      font-style: italic;
+      color: #64748b;
+    }
+    ul.bullet-list {
+      margin-left: 14px;
+      margin-top: 1.5px;
+    }
+    ul.bullet-list li {
+      margin-bottom: 1px;
+      font-size: 8.4pt;
+      color: #1e293b;
+      line-height: 1.24;
+    }
+    .skills-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5px;
+    }
+    .skill-row {
+      font-size: 8.4pt;
+      color: #1e293b;
+      line-height: 1.24;
+    }
+    .skill-label {
+      font-weight: 700;
+      color: #0f172a;
+      display: inline-block;
+      min-width: 155px;
+    }
+    @media print {
+      body {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <h1>Saiful Islam</h1>
+    <div class="subtitle">Computer Science & Engineering Undergraduate • Mobile & Web Developer</div>
+    <div class="contact-row">
+      <span>Sylhet, Bangladesh</span>
+      <span>•</span>
+      <span><a href="tel:+8801707224860">+880 1707-224860</a></span>
+      <span>•</span>
+      <span><a href="mailto:saiful1616.islam@gmail.com">saiful1616.islam@gmail.com</a></span>
+      <span>•</span>
+      <span><a href="https://github.com/saiful16164" target="_blank">github.com/saiful16164</a></span>
+      <span>•</span>
+      <span><a href="https://www.linkedin.com/in/saiful1616/" target="_blank">linkedin.com/in/saiful1616</a></span>
+    </div>
+  </header>
+
+  <!-- EDUCATION -->
+  <section>
+    <div class="section-title">Education</div>
+    <div class="item">
+      <div class="item-header">
+        <div><span class="item-title">Sylhet Engineering College</span> — <span class="item-subtitle">B.Sc. in Computer Science & Engineering</span></div>
+        <div class="item-date">2022 – Present</div>
+      </div>
+      <div class="item-location">Sylhet, Bangladesh</div>
+      <ul class="bullet-list">
+        <li><strong>Coursework:</strong> Data Structures & Algorithms, OOP, DBMS, Software Engineering, Machine Learning, Operating Systems, Computer Networks.</li>
+      </ul>
+    </div>
+    <div class="item" style="margin-top: 2px;">
+      <div class="item-header">
+        <div><span class="item-title">BAF Shaheen College Shamshernagar</span> — <span class="item-subtitle">Higher Secondary Certificate (HSC), Science</span></div>
+        <div class="item-date">2020 – 2022</div>
+      </div>
+      <div class="item-location">Moulvibazar, Bangladesh</div>
+    </div>
+  </section>
+
+  <!-- TECHNICAL SKILLS -->
+  <section>
+    <div class="section-title">Technical Skills</div>
+    <div class="skills-grid">
+      <div class="skill-row">
+        <span class="skill-label">Programming Languages:</span>
+        <span>C, C++, Python, Dart, Kotlin, TypeScript, JavaScript, SQL</span>
+      </div>
+      <div class="skill-row">
+        <span class="skill-label">Frameworks & Libraries:</span>
+        <span>Flutter, Android SDK, React.js, Next.js, PyTorch, Node.js, Tailwind CSS</span>
+      </div>
+      <div class="skill-row">
+        <span class="skill-label">Databases & Cloud:</span>
+        <span>PostgreSQL, Supabase, Firebase (Firestore, Auth, FCM), SQLite</span>
+      </div>
+      <div class="skill-row">
+        <span class="skill-label">Developer Tools:</span>
+        <span>Git, GitHub, VS Code, Android Studio, Linux, RESTful APIs, Postman</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESEARCH PUBLICATIONS -->
+  <section>
+    <div class="section-title">Research Publications</div>
+    <div class="item">
+      <div class="item-header">
+        <div>
+          <span class="item-title">Classification of Guava and Mango Leaf Diseases Using YOLOv11 and Stable Diffusion-Based Augmentation</span>
+        </div>
+        <div class="item-date">Dec 2025</div>
+      </div>
+      <div class="item-subtitle">2025 28th International Conference on Computer and Information Technology (ICCIT) | <a href="https://doi.org/10.1109/ICCIT68739.2025.11491324" target="_blank">DOI: 10.1109/ICCIT68739.2025.11491324</a></div>
+      <ul class="bullet-list">
+        <li>Formulated a deep learning pipeline pairing YOLOv11 with generative Stable Diffusion data augmentation to eliminate agricultural dataset scarcity.</li>
+        <li>Achieved superior detection accuracy and recall across complex plant pathologies under uncontrolled field conditions.</li>
+      </ul>
+    </div>
+    <div class="item" style="margin-top: 3px;">
+      <div class="item-header">
+        <div>
+          <span class="item-title">Bangla Optical Character Recognition using Vision Transformers and CNN Ensembles</span>
+        </div>
+        <div class="item-date">Dec 2025</div>
+      </div>
+      <div class="item-subtitle">2025 IEEE WIECON-ECE Conference | <a href="https://doi.org/10.1109/WIECON-ECE69386.2025.11526313" target="_blank">DOI: 10.1109/WIECON-ECE69386.2025.11526313</a></div>
+      <ul class="bullet-list">
+        <li>Designed a hybrid Vision Transformer (ViT) and CNN architecture for high-accuracy recognition of complex cursive and printed Bangla scripts.</li>
+        <li>Benchmarked Character Error Rates against existing baselines, demonstrating elevated robustness to noisy and low-resolution inputs.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- KEY PROJECTS -->
+  <section>
+    <div class="section-title">Key Projects</div>
+    <div class="item">
+      <div class="item-header">
+        <div>
+          <span class="item-title">Smart Ledger</span> — <span class="item-subtitle">Personal Finance & Expense Analytics App</span>
+        </div>
+        <div class="item-date">Flutter • Dart • Supabase • PostgreSQL</div>
+      </div>
+      <ul class="bullet-list">
+        <li>Engineered a cross-platform mobile expense tracker featuring categorized transaction logging, budget alerts, and real-time cloud sync.</li>
+        <li>Architected offline-first local persistence with Supabase background syncing, maintaining sub-50ms UI response times without network.</li>
+        <li>Built interactive statistical visualizers (breakdown charts, monthly trends, multi-currency conversion) for actionable financial insights.</li>
+      </ul>
+    </div>
+    <div class="item" style="margin-top: 3px;">
+      <div class="item-header">
+        <div>
+          <span class="item-title">SEC Routine App</span> — <span class="item-subtitle">Automated College Schedule & Timetable Manager</span>
+        </div>
+        <div class="item-date">Flutter • Firebase • Kotlin • Android</div>
+      </div>
+      <ul class="bullet-list">
+        <li>Developed an academic scheduling application adopted by Sylhet Engineering College students to automate lecture tracking and timetable lookups.</li>
+        <li>Integrated Firebase Cloud Messaging (FCM) to trigger background push notifications prior to scheduled lecture and lab sessions.</li>
+        <li>Implemented personalized schedule filtering by department, semester, and section with offline timetable caching.</li>
+      </ul>
+    </div>
+    <div class="item" style="margin-top: 3px;">
+      <div class="item-header">
+        <div>
+          <span class="item-title">Exam Rush Hour</span> — <span class="item-subtitle">Real-Time Academic Assessment Platform</span>
+        </div>
+        <div class="item-date">Next.js • TypeScript • React • PostgreSQL</div>
+      </div>
+      <ul class="bullet-list">
+        <li>Architected an interactive examination platform featuring timed challenge sessions, peer competition, and live score leaderboards.</li>
+        <li>Constructed high-performance server-rendered UI components with Next.js App Router and secure user session management.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- HONORS & ACTIVITIES -->
+  <section>
+    <div class="section-title">Honors & Activities</div>
+    <div class="item">
+      <div class="item-header">
+        <div><span class="item-title">SUST Hackathon 2026</span> — <span class="item-subtitle">Shahjalal University of Science & Technology (SUST EEE Carnival)</span></div>
+        <div class="item-date">2026</div>
+      </div>
+      <ul class="bullet-list">
+        <li>Collaborated in an intensive sprint environment to architect, build, and pitch technical solutions under competitive deadlines.</li>
+      </ul>
+    </div>
+    <div class="item" style="margin-top: 2px;">
+      <div class="item-header">
+        <div><span class="item-title">Leading University Junior IUPC 2024</span> — <span class="item-subtitle">Inter-University Programming Contest</span></div>
+        <div class="item-date">2024</div>
+      </div>
+      <ul class="bullet-list">
+        <li>Represented Sylhet Engineering College solving complex algorithmic, dynamic programming, and data structure problem sets.</li>
+      </ul>
+    </div>
+    <div class="item" style="margin-top: 2px;">
+      <div class="item-header">
+        <div><span class="item-title">Paper Presenter</span> — <span class="item-subtitle">IEEE ICCIT 2025 & IEEE WIECON-ECE 2025</span></div>
+        <div class="item-date">Dec 2025</div>
+      </div>
+      <ul class="bullet-list">
+        <li>Delivered oral presentations defending computer vision research at international IEEE conferences in Cox's Bazar, Bangladesh.</li>
+      </ul>
+    </div>
+  </section>
+
+</body>
+</html>

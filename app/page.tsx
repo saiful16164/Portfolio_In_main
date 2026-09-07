@@ -4,6 +4,7 @@ import { useState, Suspense } from "react";
 import { personalInfo, Project } from "@/app/data";
 import ProjectCard from "@/app/components/ProjectCard";
 import ProjectModal from "@/app/components/ProjectModal";
+import ResumeModal from "@/app/components/ResumeModal";
 import SectionHeading from "@/app/components/SectionHeading";
 import SkillCard from "@/app/components/SkillCard";
 import EventCard from "@/app/components/EventCard";
@@ -39,6 +40,7 @@ interface BlogPost { id: string; title: string; excerpt: string; content: string
 
 export default function HomePage() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [resumeModalOpen, setResumeModalOpen] = useState(false);
 
   const profileImage = portfolioData.siteSettings.profileImage || personalInfo.profileImage;
 
@@ -451,41 +453,103 @@ export default function HomePage() {
       </section>
 
       {/* ===== RESUME SECTION ===== */}
-      {resumeLink && <section id="resume" className="section">
-        <div className="container" style={{ maxWidth: "800px" }}>
-          <SectionHeading title="Resume" subtitle="Download my resume or view it inline" />
-          <div className="resume-card glass-card animate-fade-in-up">
-            <div className="resume-preview">
-              {resumeLink ? (
-                <iframe src={resumeLink} className="resume-iframe" title="Resume Preview" />
-              ) : (
-                <div className="resume-placeholder">
-                  <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" strokeWidth="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /><line x1="16" y1="13" x2="8" y2="13" /><line x1="16" y1="17" x2="8" y2="17" /></svg>
-                  <h3 style={{ fontFamily: "var(--font-playfair, var(--font-heading))", fontSize: "1.2rem", fontWeight: 700, marginTop: "1rem" }}>
-                    <span className="accent-text">Resume Not Available</span>
-                  </h3>
-                  <p style={{ color: "var(--text-secondary)", fontSize: "0.9rem", marginTop: "0.5rem" }}>
-                    A resume has not been uploaded yet.
-                  </p>
+      {resumeLink && (
+        <section id="resume" className="section">
+          <div className="container" style={{ maxWidth: "900px" }}>
+            <SectionHeading
+              title="Resume"
+              subtitle="Review my background, publications, and engineering experience"
+            />
+            <div className="resume-showcase-card glass-card animate-fade-in-up">
+              {/* Card Header */}
+              <div className="resume-card-header">
+                <div className="resume-card-title-group">
+                  <div className="resume-card-icon-wrap">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                      <polyline points="14 2 14 8 20 8" />
+                      <line x1="16" y1="13" x2="8" y2="13" />
+                      <line x1="16" y1="17" x2="8" y2="17" />
+                      <polyline points="10 9 9 9 8 9" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 className="resume-card-name">Saiful Islam</h3>
+                    <p className="resume-card-role">CSE Undergraduate • Mobile & Web Developer • ML Researcher</p>
+                  </div>
                 </div>
-              )}
-            </div>
-            <div className="resume-actions">
-              {resumeLink && (
-                <a href={resumeLink} target="_blank" rel="noopener noreferrer" className="btn-primary">
+                <span className="badge badge-emerald">Available for Opportunities</span>
+              </div>
+
+              {/* 4 Highlights Grid */}
+              <div className="resume-highlights-grid">
+                <div className="resume-highlight-item">
+                  <div className="highlight-icon">🎓</div>
+                  <div className="highlight-info">
+                    <span className="highlight-title">Education</span>
+                    <span className="highlight-desc">B.Sc. in Computer Science & Engineering (SEC)</span>
+                  </div>
+                </div>
+
+                <div className="resume-highlight-item">
+                  <div className="highlight-icon">🔬</div>
+                  <div className="highlight-info">
+                    <span className="highlight-title">Publications</span>
+                    <span className="highlight-desc">2 IEEE Papers (ICCIT & WIECON-ECE)</span>
+                  </div>
+                </div>
+
+                <div className="resume-highlight-item">
+                  <div className="highlight-icon">💻</div>
+                  <div className="highlight-info">
+                    <span className="highlight-title">Core Technologies</span>
+                    <span className="highlight-desc">Flutter, Android, Next.js, Python, PostgreSQL</span>
+                  </div>
+                </div>
+
+                <div className="resume-highlight-item">
+                  <div className="highlight-icon">🏆</div>
+                  <div className="highlight-info">
+                    <span className="highlight-title">Hackathons & Contests</span>
+                    <span className="highlight-desc">SUST Hackathon 2026 & LU IUPC 2024</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="resume-card-actions">
+                <button
+                  onClick={() => setResumeModalOpen(true)}
+                  className="btn-primary"
+                >
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                    <circle cx="12" cy="12" r="3" />
+                  </svg>
+                  View Full Resume
+                </button>
+
+                <a
+                  href="/resume.pdf"
+                  download="Saiful_Islam_Resume.pdf"
+                  className="btn-outline"
+                >
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
                     <polyline points="7 10 12 15 17 10" />
                     <line x1="12" y1="15" x2="12" y2="3" />
                   </svg>
-                  Download Resume
+                  Download PDF
                 </a>
-              )}
-              <a href="#contact" className="btn-outline">Contact Me</a>
+
+                <a href="#contact" className="btn-outline">
+                  Contact Me
+                </a>
+              </div>
             </div>
           </div>
-        </div>
-      </section>}
+        </section>
+      )}
 
       {/* ===== CONTACT SECTION ===== */}
       <section id="contact" className="section">
@@ -538,6 +602,12 @@ export default function HomePage() {
       <ProjectModal
         project={selectedProject}
         onClose={() => setSelectedProject(null)}
+      />
+
+      {/* ===== RESUME FULL PREVIEW MODAL ===== */}
+      <ResumeModal
+        isOpen={resumeModalOpen}
+        onClose={() => setResumeModalOpen(false)}
       />
 
       <style jsx>{`
@@ -766,11 +836,120 @@ export default function HomePage() {
         .blog-card:hover .read-more-link { opacity: 0.8; }
 
         /* ===== RESUME ===== */
-        .resume-card { padding: 2rem; display: flex; flex-direction: column; gap: 1.5rem; }
-        .resume-preview { border: 2px dashed var(--border-color); border-radius: var(--radius-md); min-height: 500px; display: flex; align-items: center; justify-content: center; overflow: hidden; background: var(--bg-glass); }
-        .resume-iframe { width: 100%; height: 100%; min-height: 500px; border: none; }
-        .resume-placeholder { text-align: center; padding: 2rem; }
-        .resume-actions { display: flex; gap: 1rem; justify-content: center; }
+        .resume-showcase-card {
+          padding: 2.25rem;
+          display: flex;
+          flex-direction: column;
+          gap: 1.75rem;
+          border: 1px solid rgba(16, 185, 129, 0.25);
+          background: rgba(13, 23, 18, 0.7);
+          box-shadow: 0 12px 35px rgba(0, 0, 0, 0.45);
+        }
+
+        .resume-card-header {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          flex-wrap: wrap;
+          gap: 1rem;
+          padding-bottom: 1.25rem;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .resume-card-title-group {
+          display: flex;
+          align-items: center;
+          gap: 1rem;
+        }
+
+        .resume-card-icon-wrap {
+          width: 48px;
+          height: 48px;
+          border-radius: 12px;
+          background: rgba(16, 185, 129, 0.12);
+          border: 1px solid rgba(16, 185, 129, 0.3);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .resume-card-name {
+          font-family: var(--font-playfair, var(--font-heading));
+          font-size: 1.4rem;
+          font-weight: 700;
+          color: var(--text-primary);
+        }
+
+        .resume-card-role {
+          font-size: 0.88rem;
+          color: var(--text-secondary);
+          margin-top: 0.2rem;
+        }
+
+        .resume-highlights-grid {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 1rem;
+        }
+
+        .resume-highlight-item {
+          display: flex;
+          align-items: flex-start;
+          gap: 0.85rem;
+          padding: 1rem 1.15rem;
+          background: rgba(255, 255, 255, 0.03);
+          border: 1px solid rgba(255, 255, 255, 0.06);
+          border-radius: var(--radius-md);
+          transition: all var(--transition-fast);
+        }
+
+        .resume-highlight-item:hover {
+          background: rgba(16, 185, 129, 0.06);
+          border-color: rgba(16, 185, 129, 0.25);
+          transform: translateY(-2px);
+        }
+
+        .highlight-icon {
+          font-size: 1.35rem;
+          line-height: 1;
+        }
+
+        .highlight-info {
+          display: flex;
+          flex-direction: column;
+          gap: 0.2rem;
+        }
+
+        .highlight-title {
+          font-size: 0.8rem;
+          font-weight: 700;
+          text-transform: uppercase;
+          letter-spacing: 0.06em;
+          color: var(--accent);
+        }
+
+        .highlight-desc {
+          font-size: 0.88rem;
+          color: var(--text-secondary);
+          line-height: 1.4;
+        }
+
+        .resume-card-actions {
+          display: flex;
+          gap: 1rem;
+          justify-content: flex-start;
+          flex-wrap: wrap;
+          padding-top: 0.5rem;
+        }
+
+        @media (max-width: 640px) {
+          .resume-highlights-grid {
+            grid-template-columns: 1fr;
+          }
+          .resume-card-actions {
+            flex-direction: column;
+          }
+        }
 
         /* ===== CONTACT ===== */
         .contact-layout { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 2rem; align-items: start; }
