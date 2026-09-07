@@ -3,12 +3,13 @@
 import { useState, Suspense } from "react";
 import { personalInfo, Project, projectCategories } from "@/app/data";
 import ProjectCard from "@/app/components/ProjectCard";
+import ProjectModal from "@/app/components/ProjectModal";
 import SectionHeading from "@/app/components/SectionHeading";
-import SkillBar from "@/app/components/SkillBar";
+import SkillCard from "@/app/components/SkillCard";
 import ContactForm from "@/app/components/ContactForm";
 import portfolioData from "@/app/data/portfolio-data.json";
 
-interface Skill { id: string; name: string; category: "Programming Languages" | "Technologies" | "Tools"; proficiency: number; }
+interface Skill { id: string; name: string; category: "Programming Languages" | "Technologies" | "Tools"; proficiency?: number; }
 interface Achievement { id: string; title: string; description: string; type: "Competition" | "Hackathon" | "Award" | "Certification"; date: string; link: string; }
 interface Research { id: string; title: string; abstract: string; publicationName: string; pdfLink: string; doiLink: string; status: "Published" | "Under Review" | "In Progress"; }
 interface BlogPost { id: string; title: string; excerpt: string; content: string; tags: string[]; status: "Published" | "Draft"; readTime: string; createdAt: string; }
@@ -16,18 +17,31 @@ interface BlogPost { id: string; title: string; excerpt: string; content: string
 export default function HomePage() {
   const [activeCategory, setActiveCategory] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   const profileImage = portfolioData.siteSettings.profileImage || personalInfo.profileImage;
 
   // ===== DATA =====
-  const allProjects: Project[] = portfolioData.projects
-    .sort((a, b) => a.sortOrder - b.sortOrder)
+  const allProjects: Project[] = (portfolioData.projects as Array<Project & { sortOrder?: number }>)
+    .sort((a, b) => (a.sortOrder ?? 0) - (b.sortOrder ?? 0))
     .map(p => ({
-      id: p.id, title: p.title, description: p.description,
-      technologies: p.technologies, githubLink: p.githubLink,
-      demoLink: p.demoLink || "", image: p.image || "",
-      status: p.status as "Completed" | "Ongoing", featured: p.featured,
-      tags: p.tags, features: p.features,
+      id: p.id,
+      title: p.title,
+      subtitle: p.subtitle,
+      description: p.description,
+      problemStatement: p.problemStatement,
+      technologies: p.technologies,
+      githubLink: p.githubLink,
+      demoLink: p.demoLink || "",
+      image: p.image || "",
+      status: p.status as "Completed" | "Ongoing",
+      featured: p.featured,
+      tags: p.tags,
+      features: p.features,
+      screenshots: p.screenshots || [],
+      architecture: p.architecture,
+      highlights: p.highlights || [],
+      role: p.role,
     }));
 
   const filteredProjects = allProjects.filter((project: Project) => {
@@ -41,7 +55,7 @@ export default function HomePage() {
 
   const allSkills: Skill[] = portfolioData.skills
     .sort((a, b) => a.sortOrder - b.sortOrder)
-    .map(s => ({ id: s.id, name: s.name, category: s.category as Skill["category"], proficiency: s.proficiency }));
+    .map(s => ({ id: s.id, name: s.name, category: s.category as Skill["category"] }));
 
   const categories = ["Programming Languages", "Technologies", "Tools"] as const;
   const categoryColors: Record<string, string> = { "Programming Languages": "var(--accent)", Technologies: "var(--accent-secondary)", Tools: "var(--rose)" };
@@ -215,8 +229,8 @@ export default function HomePage() {
 
       {/* ===== SKILLS SECTION ===== */}
       <section id="skills" className="section">
-        <div className="container" style={{ maxWidth: "900px" }}>
-          <SectionHeading title="Skills" subtitle="Technologies and tools I work with" />
+        <div className="container" style={{ maxWidth: "1000px" }}>
+          <SectionHeading title="Skills" subtitle="Technologies, frameworks, and developer tools I build with" />
           {allSkills.length === 0 ? (
             <div style={{ textAlign: "center", padding: "3rem", color: "var(--text-muted)" }}>
               <p>No skills added yet.</p>
@@ -227,11 +241,14 @@ export default function HomePage() {
                 const categorySkills = allSkills.filter((s: Skill) => s.category === category);
                 if (categorySkills.length === 0) return null;
                 return (
-                  <div key={category} className="skill-category-section animate-fade-in-up" style={{ animationDelay: `${catIdx * 0.2}s` }}>
-                    <h3 className="category-title"><span className="accent-text">{category}</span></h3>
-                    <div className="skill-bars-grid glass-card" style={{ padding: "1.75rem" }}>
+                  <div key={category} className="skill-category-section animate-fade-in-up" style={{ animationDelay: `${catIdx * 0.15}s` }}>
+                    <h3 className="category-title">
+                      <span className="accent-text">{category}</span>
+                      <span className="category-count">({categorySkills.length})</span>
+                    </h3>
+                    <div className="skills-logo-grid">
                       {categorySkills.map((skill: Skill) => (
-                        <SkillBar key={skill.id} name={skill.name} proficiency={skill.proficiency} color={categoryColors[category]} />
+                        <SkillCard key={skill.id} name={skill.name} />
                       ))}
                     </div>
                   </div>
@@ -267,7 +284,10 @@ export default function HomePage() {
             <div className="projects-grid">
               {filteredProjects.map((project: Project, i: number) => (
                 <div key={project.id} className="animate-fade-in-up" style={{ animationDelay: `${i * 0.1}s` }}>
-                  <ProjectCard project={project} />
+                  <ProjectCard
+                    project={project}
+                    onClick={() => setSelectedProject(project)}
+                  />
                 </div>
               ))}
             </div>
@@ -453,6 +473,12 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ===== PROJECT DETAILS MODAL ===== */}
+      <ProjectModal
+        project={selectedProject}
+        onClose={() => setSelectedProject(null)}
+      />
+
       <style jsx>{`
         /* ===== HERO ===== */
         .hero { position: relative; padding: 5rem 0 3rem; overflow: hidden; min-height: calc(100vh - 70px); display: flex; align-items: center; }
@@ -505,9 +531,14 @@ export default function HomePage() {
         .interest-bullet { color: var(--accent); font-size: 0.9rem; }
 
         /* ===== SKILLS ===== */
-        .skills-categories { display: flex; flex-direction: column; gap: 2.5rem; }
+        .skills-categories { display: flex; flex-direction: column; gap: 2.25rem; }
         .category-title { font-family: var(--font-playfair, var(--font-heading)); display: flex; align-items: center; gap: 0.6rem; font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem; }
-        .skill-bars-grid { display: flex; flex-direction: column; gap: 1.25rem; }
+        .category-count { font-size: 0.82rem; color: var(--text-muted); font-weight: 500; }
+        .skills-logo-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+          gap: 0.85rem;
+        }
 
         /* ===== PROJECTS ===== */
         .filter-bar { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; justify-content: space-between; margin-bottom: 2rem; }

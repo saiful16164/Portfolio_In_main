@@ -1,8 +1,14 @@
-// ===== TYPE DEFINITIONS =====
+export interface ProjectScreenshot {
+  url: string;
+  caption: string;
+}
+
 export interface Project {
   id: string;
   title: string;
+  subtitle?: string;
   description: string;
+  problemStatement?: string;
   technologies: string[];
   githubLink: string;
   demoLink?: string;
@@ -11,6 +17,10 @@ export interface Project {
   featured: boolean;
   tags: string[];
   features: string[];
+  screenshots?: ProjectScreenshot[];
+  architecture?: string;
+  highlights?: string[];
+  role?: string;
 }
 
 export interface Research {
@@ -27,7 +37,7 @@ export interface Skill {
   id: string;
   name: string;
   category: "Programming Languages" | "Technologies" | "Tools";
-  proficiency: number;
+  proficiency?: number;
   icon?: string;
 }
 
@@ -131,5 +141,5 @@ export const navLinks = [
 ];
 
 export const projectCategories = [
-  "All", "Web", "Mobile", "AI", "Backend", "CLI", "Flutter",
+  "All", "Mobile", "Flutter", "Android", "Web", "Backend", "AI",
 ];

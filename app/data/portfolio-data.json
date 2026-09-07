@@ -1,55 +1,146 @@
 {
     "projects": [
         {
-            "id": "1",
+            "id": "routine-app",
+            "title": "Routine App",
+            "subtitle": "Smart Academic Routine & Real-Time Schedule Manager",
+            "description": "A native Android application crafted with Kotlin and Firebase for university students and Class Representatives (CRs) to eliminate timetable confusion with instant, cloud-synced schedules and role-based permissions.",
+            "problemStatement": "In universities and colleges, class timetables are constantly updated due to rescheduling, room changes, and faculty availability. Traditional communication channels (like messaging groups or static PDFs) create confusion, missed lectures, and wasted time. Routine App provides a synchronized academic schedule where CRs can update timetable entries in real time, and students receive instant updates with zero manual refresh.",
+            "technologies": [
+                "Kotlin",
+                "Android",
+                "Firebase Realtime DB",
+                "MVVM",
+                "ViewBinding",
+                "Coroutines",
+                "Material 3"
+            ],
+            "githubLink": "https://github.com/saiful16164/Routine-App",
+            "demoLink": "",
+            "image": "/projects/routine/hero_banner.jpg",
+            "status": "Completed",
+            "featured": true,
+            "tags": [
+                "Mobile",
+                "Android",
+                "Firebase"
+            ],
+            "features": [
+                "Dual-Role Access Control (Students vs. CRs with elevated editing privileges)",
+                "Cloud-Synced Weekly Timetable with ViewPager2 swipe transitions",
+                "Dynamic Chronological Class Sorting with upcoming lecture priority",
+                "Detailed Class Cards with Subject, Room number, Teacher tags, and exact duration",
+                "Single-Activity Architecture with Jetpack Navigation and Coroutines"
+            ],
+            "screenshots": [
+                { "url": "/projects/routine/hero_banner.jpg", "caption": "Routine App — Next-Gen Academic Schedule Manager" },
+                { "url": "/projects/routine/schedule_view.jpg", "caption": "Weekly Timetable with day tabs & class cards" },
+                { "url": "/projects/routine/edit_class_modal.jpg", "caption": "CR Management Modal for timetable CRUD operations" },
+                { "url": "/projects/routine/auth_role_selection.jpg", "caption": "Role-Based Authentication (Student vs CR)" },
+                { "url": "/projects/routine/profile_settings.jpg", "caption": "User Profile, verified badge, and settings" }
+            ],
+            "architecture": "MVVM Architecture with Jetpack Navigation Component, ViewBinding, Kotlin Coroutines, and Firebase Realtime Database for sub-second synchronization.",
+            "highlights": [
+                "Sub-second live synchronization via Firebase Realtime listeners",
+                "Strict Role-Based Security ensuring only CRs modify class routines",
+                "Production-grade Material 3 responsive UI with dark/light theme support"
+            ],
+            "role": "Android Developer",
+            "sortOrder": 0
+        },
+        {
+            "id": "smart-ledger",
             "title": "Smart Ledger",
-            "description": "A Flutter-based store management application for tracking customers, transactions, and generating financial reports.",
+            "subtitle": "Cloud-Powered Financial Management & Double-Entry Bookkeeping Platform",
+            "description": "A cross-platform financial operating system and double-entry bookkeeping platform engineered for SMEs, merchants, and contractors with automated financial reporting, customer party ledgers, and audit trails.",
+            "problemStatement": "Small-to-medium enterprises often rely on fragmented paper ledger books (khatiyan), spreadsheets, or disconnected calculators. This results in cash-flow blindspots, delayed reconciliations, and costly accounting errors. Smart Ledger delivers a unified, real-time financial hub combining daily cashbooks, customer & supplier party ledgers, and GAAP-compliant double-entry accounting.",
             "technologies": [
                 "Flutter",
                 "Dart",
                 "Supabase",
-                "Riverpod"
+                "PostgreSQL",
+                "Riverpod",
+                "FL Chart"
             ],
-            "githubLink": "https://github.com/saiful16164",
+            "githubLink": "https://github.com/saiful16164/Smart-Ledger-for-DBMS-project-",
             "demoLink": "",
-            "image": "💰",
-            "status": "Ongoing",
-            "featured": true,
-            "tags": [
-                "Mobile",
-                "Flutter"
-            ],
-            "features": [
-                "Customer Management",
-                "Transaction Tracking",
-                "Financial Reports"
-            ],
-            "sortOrder": 0
-        },
-        {
-            "id": "2",
-            "title": "Portfolio Website",
-            "description": "A modern, dark-mode portfolio website built with Next.js 16 featuring glassmorphism effects and smooth animations.",
-            "technologies": [
-                "Next.js",
-                "React",
-                "TypeScript",
-                "Tailwind CSS"
-            ],
-            "githubLink": "https://github.com/saiful16164",
-            "demoLink": "",
-            "image": "🌐",
+            "image": "/projects/smart-ledger/hero_banner.jpg",
             "status": "Completed",
             "featured": true,
             "tags": [
+                "Mobile",
+                "Flutter",
+                "Backend"
+            ],
+            "features": [
+                "Executive Financial Dashboard with Real-Time KPIs (To Receive, To Pay, Sales, Cash)",
+                "Customer & Supplier Party Ledger with credit limits and running balances",
+                "Unified Digital Cashbook tracking cash inflows and outflows with multi-channel tags",
+                "GAAP-Compliant Double-Entry Engine (Chart of Accounts, Journal Entries, Trial Balance)",
+                "Visual Financial Analytics with periodic breakdown and interactive FL Chart graphs",
+                "PostgreSQL Database with Row-Level Security (RLS) and transaction integrity"
+            ],
+            "screenshots": [
+                { "url": "/projects/smart-ledger/hero_banner.jpg", "caption": "Smart Ledger — Executive Financial Operating System" },
+                { "url": "/projects/smart-ledger/dashboard.jpg", "caption": "Executive Financial Dashboard with core KPI metrics" },
+                { "url": "/projects/smart-ledger/reports.jpg", "caption": "Visual Reporting & Income vs Expense analytics" },
+                { "url": "/projects/smart-ledger/cashbook.jpg", "caption": "Unified Digital Cashbook with payment tags" },
+                { "url": "/projects/smart-ledger/customer_ledger.jpg", "caption": "Party & Customer Ledger with running credit balances" }
+            ],
+            "architecture": "Clean Architecture powered by Riverpod 2.6 state management, Supabase PostgreSQL with strict RLS policies, and interactive FL Chart visualization engines.",
+            "highlights": [
+                "Strict Double-Entry verification ensuring Σ Debit = Σ Credit across all transactions",
+                "Zero data-loss audit trails with Supabase Row-Level Security",
+                "Cross-platform responsive Flutter client for mobile and desktop"
+            ],
+            "role": "Full-Stack Flutter & DBMS Developer",
+            "sortOrder": 1
+        },
+        {
+            "id": "exam-rush-hour",
+            "title": "Exam Rush Hour",
+            "subtitle": "Dual-Mode Online Examination & Digital Script Evaluation Platform",
+            "description": "A full-stack examination and grading platform supporting automated instant MCQ assessments and handwritten exam script grading with an in-app digital red pen drawing board for teachers.",
+            "problemStatement": "Existing exam software either only supports simplistic multiple-choice tests or requires teachers to manually download, print, or edit hundreds of handwritten student math and engineering answer sheets across third-party photo tools. Exam Rush Hour bridges this gap by unifying automated instant MCQ scoring with an interactive in-app digital grading canvas featuring zoom, 90-degree rotation, and red pen markups.",
+            "technologies": [
+                "Flutter",
+                "Dart",
+                "Supabase",
+                "Riverpod",
+                "PostgreSQL",
+                "CustomPainter"
+            ],
+            "githubLink": "https://github.com/saiful16164/Exam-Rush-Hour",
+            "demoLink": "",
+            "image": "/projects/exam-rush/drawing_board.jpg",
+            "status": "Completed",
+            "featured": true,
+            "tags": [
+                "Mobile",
+                "Flutter",
                 "Web"
             ],
             "features": [
-                "Dark Mode",
-                "Responsive Design",
-                "Glassmorphism UI"
+                "Dual-Mode Testing: Automated MCQ testing with instant scoring & written subjective exams",
+                "In-App Digital Grading Board with red pen annotation, stroke width, zoom, and rotation",
+                "Multi-Page Answer Sheet Upload pipeline with progressive progress and local caching",
+                "Persistent countdown exam timer with anti-cheat session recovery",
+                "Real-time teacher submission tracking and automatic score aggregation",
+                "Supabase Storage integration with automated script export and cloud archival"
             ],
-            "sortOrder": 1
+            "screenshots": [
+                { "url": "/projects/exam-rush/drawing_board.jpg", "caption": "Teacher Interactive Evaluation Canvas with digital red pen annotations" },
+                { "url": "/projects/exam-rush/student_room.jpg", "caption": "Student MCQ Exam Room with live countdown timer and question navigator" },
+                { "url": "/projects/exam-rush/icon-512.png", "caption": "Exam Rush Hour Platform Identity" }
+            ],
+            "architecture": "Flutter client with code-generated Riverpod 2.5, GoRouter declarative routing, CustomPainter / TransformationController vector drawing engine, and Supabase serverless PostgreSQL.",
+            "highlights": [
+                "Proprietary drawing precision engine maintaining vector mark accuracy across image zoom and 90° rotation",
+                "Resilient multi-page upload pipeline designed for low-bandwidth student connections",
+                "Full-featured role separation between educators and students"
+            ],
+            "role": "Lead Mobile & Backend Developer",
+            "sortOrder": 2
         }
     ],
     "research": [
@@ -63,83 +154,23 @@
         }
     ],
     "skills": [
-        {
-            "id": "1",
-            "name": "Dart",
-            "category": "Programming Languages",
-            "proficiency": 85,
-            "sortOrder": 0
-        },
-        {
-            "id": "2",
-            "name": "Python",
-            "category": "Programming Languages",
-            "proficiency": 75,
-            "sortOrder": 1
-        },
-        {
-            "id": "3",
-            "name": "TypeScript",
-            "category": "Programming Languages",
-            "proficiency": 70,
-            "sortOrder": 2
-        },
-        {
-            "id": "4",
-            "name": "C/C++",
-            "category": "Programming Languages",
-            "proficiency": 65,
-            "sortOrder": 3
-        },
-        {
-            "id": "5",
-            "name": "Flutter",
-            "category": "Technologies",
-            "proficiency": 85,
-            "sortOrder": 0
-        },
-        {
-            "id": "6",
-            "name": "Next.js",
-            "category": "Technologies",
-            "proficiency": 70,
-            "sortOrder": 1
-        },
-        {
-            "id": "7",
-            "name": "React",
-            "category": "Technologies",
-            "proficiency": 65,
-            "sortOrder": 2
-        },
-        {
-            "id": "8",
-            "name": "Supabase",
-            "category": "Technologies",
-            "proficiency": 60,
-            "sortOrder": 3
-        },
-        {
-            "id": "9",
-            "name": "Git & GitHub",
-            "category": "Tools",
-            "proficiency": 80,
-            "sortOrder": 0
-        },
-        {
-            "id": "10",
-            "name": "VS Code",
-            "category": "Tools",
-            "proficiency": 90,
-            "sortOrder": 1
-        },
-        {
-            "id": "11",
-            "name": "Firebase",
-            "category": "Tools",
-            "proficiency": 55,
-            "sortOrder": 2
-        }
+        { "id": "1", "name": "Dart", "category": "Programming Languages", "sortOrder": 0 },
+        { "id": "2", "name": "Kotlin", "category": "Programming Languages", "sortOrder": 1 },
+        { "id": "3", "name": "Python", "category": "Programming Languages", "sortOrder": 2 },
+        { "id": "4", "name": "TypeScript", "category": "Programming Languages", "sortOrder": 3 },
+        { "id": "5", "name": "C/C++", "category": "Programming Languages", "sortOrder": 4 },
+        { "id": "6", "name": "SQL", "category": "Programming Languages", "sortOrder": 5 },
+        { "id": "7", "name": "Flutter", "category": "Technologies", "sortOrder": 0 },
+        { "id": "8", "name": "Android", "category": "Technologies", "sortOrder": 1 },
+        { "id": "9", "name": "Next.js", "category": "Technologies", "sortOrder": 2 },
+        { "id": "10", "name": "React", "category": "Technologies", "sortOrder": 3 },
+        { "id": "11", "name": "PyTorch", "category": "Technologies", "sortOrder": 4 },
+        { "id": "12", "name": "Data Science", "category": "Technologies", "sortOrder": 5 },
+        { "id": "13", "name": "Supabase", "category": "Technologies", "sortOrder": 6 },
+        { "id": "14", "name": "Firebase", "category": "Technologies", "sortOrder": 7 },
+        { "id": "15", "name": "PostgreSQL", "category": "Technologies", "sortOrder": 8 },
+        { "id": "16", "name": "Git & GitHub", "category": "Tools", "sortOrder": 0 },
+        { "id": "17", "name": "VS Code", "category": "Tools", "sortOrder": 1 }
     ],
     "achievements": [
         {
