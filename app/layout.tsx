@@ -23,10 +23,18 @@ export const metadata: Metadata = {
     "CSE undergraduate, developer, and problem solver. Explore my projects, skills, research, and more.",
   keywords: ["portfolio", "developer", "CSE", "Flutter", "React", "Saiful Islam"],
   authors: [{ name: "Saiful Islam" }],
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/icon.png", type: "image/png" },
+    ],
+    apple: "/apple-touch-icon.png",
+  },
   openGraph: {
     title: "Saiful Islam — Developer Portfolio",
     description: "CSE undergraduate, developer, and problem solver.",
     type: "website",
+    images: ["/saiful_image.jpeg"],
   },
 };
 
