@@ -640,21 +640,96 @@ export default function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
           border-color: #ef4444;
         }
 
-        @media (max-width: 640px) {
-          .resume-paper {
-            padding: 1.25rem 1rem;
-          }
+        @media (max-width: 768px) {
           .resume-modal-card {
             height: 96vh;
             max-height: 96vh;
+            border-radius: 12px;
+          }
+          .resume-modal-header {
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 0.85rem 1rem;
+            gap: 0.65rem;
+          }
+          .resume-modal-actions {
+            width: 100%;
+            justify-content: flex-end;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+          }
+          .resume-paper {
+            padding: 1.5rem 1.15rem;
+          }
+          .modal-title {
+            font-size: 0.95rem;
+          }
+          .entry-line1 {
+            flex-direction: column;
+            gap: 0.15rem;
+          }
+          .entry-line2 {
+            flex-direction: column;
+            gap: 0.1rem;
+          }
+          .paper-name {
+            font-size: 1.35rem;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .resume-modal-backdrop {
+            padding: 0.25rem;
+          }
+          .resume-modal-card {
+            height: 98vh;
+            max-height: 98vh;
+            border-radius: 8px;
+          }
+          .resume-paper {
+            padding: 1rem 0.75rem;
+            border-radius: 4px;
+          }
+          .resume-modal-scroll {
+            padding: 0.75rem 0.5rem 2rem;
           }
           .modal-subtitle {
             display: none;
+          }
+          .modal-action-btn span {
+            display: none;
+          }
+          .modal-action-btn {
+            padding: 0.4rem;
           }
           .skill-head {
             display: block;
             min-width: 0;
             margin-bottom: 0.1rem;
+          }
+          .paper-bullets {
+            margin-left: 0.85rem;
+          }
+          .paper-heading {
+            font-size: 0.82rem;
+          }
+          .paper-name {
+            font-size: 1.15rem;
+          }
+          .paper-tagline {
+            font-size: 0.78rem;
+          }
+          .paper-contact {
+            font-size: 0.72rem;
+          }
+          .resume-modal-footer {
+            padding: 0.65rem 0.85rem;
+            flex-direction: column;
+            gap: 0.5rem;
+          }
+          .footer-hint {
+            font-size: 0.72rem;
+            text-align: center;
           }
         }
       `}</style>

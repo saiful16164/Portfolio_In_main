@@ -163,6 +163,22 @@ export default function Footer() {
         @media (max-width: 640px) {
           .footer-top {
             grid-template-columns: 1fr;
+            gap: 1.5rem;
+          }
+          .footer-inner {
+            padding-top: 2.5rem;
+            padding-bottom: 1.25rem;
+          }
+          .footer-bottom {
+            flex-direction: column;
+            gap: 0.75rem;
+            text-align: center;
+          }
+          .footer-copyright {
+            font-size: 0.8rem;
+          }
+          .footer-tagline {
+            font-size: 0.85rem;
           }
         }
       `}</style>

@@ -966,22 +966,78 @@ export default function HomePage() {
 
         /* ===== RESPONSIVE ===== */
         @media (max-width: 768px) {
-          .hero-container { grid-template-columns: 1fr; text-align: center; }
-          .hero-name { font-size: 2.5rem; }
-          .hero-bio { margin-left: auto; margin-right: auto; }
+          .hero { padding: 3rem 0 2rem; min-height: auto; }
+          .hero-container { grid-template-columns: 1fr; text-align: center; gap: 2rem; }
+          .hero-name { font-size: 2.2rem; }
+          .hero-title { font-size: 1rem; }
+          .hero-bio { margin-left: auto; margin-right: auto; font-size: 0.92rem; }
+          .hero-badge { margin-left: auto; margin-right: auto; }
           .hero-actions { justify-content: center; }
           .hero-socials { justify-content: center; }
-          .hero-visual { order: -1; max-width: 260px; }
-          .hero-img-wrapper { width: 220px; height: 220px; }
-          .stats-grid { grid-template-columns: repeat(2, 1fr); }
+          .hero-visual { order: -1; max-width: 220px; }
+          .hero-img-wrapper { width: 200px; height: 200px; }
+          .hero-ambient { width: 500px; height: 500px; }
+          .stats-section { padding: 0 1rem 2rem; }
+          .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
+          .stat-card { padding: 1.15rem 0.75rem; }
+          .stat-value { font-size: 1.5rem; }
+          .stat-label { font-size: 0.75rem; }
           .projects-grid { grid-template-columns: 1fr; }
-          .about-intro { flex-direction: column; align-items: center; text-align: center; }
+          .about-intro { flex-direction: column; align-items: center; text-align: center; padding: 1.5rem; }
+          .about-section-title { font-size: 1.2rem; }
           .interests-grid { grid-template-columns: 1fr; }
           .achievements-grid { grid-template-columns: 1fr; }
           .contact-layout { grid-template-columns: 1fr; }
           .filter-bar { flex-direction: column; align-items: stretch; }
           .search-input { width: 100%; min-width: unset; }
           .resume-actions { flex-direction: column; }
+          .research-card { padding: 1.5rem 1.25rem; }
+          .research-card-header { flex-direction: column; gap: 0.75rem; }
+          .research-title { font-size: 1.15rem; }
+          .research-meta-row { font-size: 0.8rem; }
+          .research-footer { flex-direction: column; align-items: flex-start; gap: 0.85rem; }
+          .research-actions { width: 100%; flex-wrap: wrap; }
+          .resume-showcase-card { padding: 1.5rem; }
+          .resume-card-header { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
+          .resume-card-name { font-size: 1.2rem; }
+          .resume-card-role { font-size: 0.82rem; }
+          .blog-card { padding: 1.25rem; }
+          .blog-title { font-size: 1.1rem; }
+          .skills-logo-grid { grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 0.65rem; }
+          .events-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 480px) {
+          .hero { padding: 2rem 0 1.5rem; }
+          .hero-name { font-size: 1.85rem; }
+          .hero-title { font-size: 0.92rem; }
+          .hero-bio { font-size: 0.88rem; }
+          .hero-visual { max-width: 180px; }
+          .hero-img-wrapper { width: 160px; height: 160px; }
+          .hero-actions { flex-direction: column; align-items: center; gap: 0.75rem; }
+          .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 0.5rem; }
+          .stat-card { padding: 1rem 0.5rem; }
+          .stat-value { font-size: 1.3rem; }
+          .about-intro { padding: 1.25rem; }
+          .about-section-title { font-size: 1.1rem; }
+          .timeline-heading { font-size: 1rem; }
+          .timeline-sub { font-size: 0.82rem; }
+          .timeline { padding-left: 1.25rem; }
+          .research-card { padding: 1.25rem 1rem; }
+          .research-title { font-size: 1.05rem; }
+          .research-abstract { font-size: 0.85rem; }
+          .research-authors { font-size: 0.85rem; }
+          .research-doi-btn { padding: 0.4rem 0.75rem; font-size: 0.78rem; }
+          .resume-showcase-card { padding: 1.15rem; gap: 1.25rem; }
+          .resume-card-title-group { flex-direction: column; align-items: flex-start; gap: 0.65rem; }
+          .resume-card-actions { gap: 0.65rem; }
+          .blog-card { padding: 1rem; }
+          .blog-title { font-size: 1rem; }
+          .blog-excerpt { font-size: 0.85rem; }
+          .category-title { font-size: 1.1rem; }
+          .skills-logo-grid { grid-template-columns: repeat(3, 1fr); gap: 0.5rem; }
+          .contact-info-card { padding: 1rem; }
+          .contact-social-card { padding: 1rem; }
         }
       `}</style>
     </>

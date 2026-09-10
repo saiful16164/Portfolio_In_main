@@ -1171,6 +1171,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
           }
           .gallery-display-area {
             height: 280px;
+            min-height: 240px;
           }
           .phone-frame {
             height: 260px;
@@ -1179,12 +1180,57 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
         }
 
         @media (max-width: 640px) {
-          .modal-overlay { padding: 0.5rem; }
-          .modal-header { flex-direction: column; gap: 0.85rem; padding: 1.15rem; }
+          .modal-overlay { padding: 0.35rem; }
+          .modal-container {
+            max-height: 95vh;
+            border-radius: var(--radius-md);
+          }
+          .modal-header {
+            flex-direction: column;
+            gap: 0.85rem;
+            padding: 1rem;
+          }
           .modal-header-actions { width: 100%; justify-content: flex-end; }
-          .modal-body-grid { padding: 1rem; }
-          .modal-footer { padding: 0.85rem 1rem; flex-direction: column; gap: 0.6rem; align-items: stretch; }
+          .modal-title { font-size: 1.25rem; }
+          .modal-subtitle { font-size: 0.82rem; }
+          .modal-badge-row { gap: 0.35rem; }
+          .modal-body-grid { padding: 0.85rem; gap: 1.25rem; }
+          .gallery-display-area {
+            height: 220px;
+            min-height: 200px;
+          }
+          .phone-frame {
+            height: 210px;
+            width: 115px;
+            border-width: 4px;
+            border-radius: 22px;
+          }
+          .phone-screen { border-radius: 18px; }
+          .landscape-display { width: 98%; }
+          .nav-arrow { width: 30px; height: 30px; }
+          .prev-arrow { left: 0.35rem; }
+          .next-arrow { right: 0.35rem; }
+          .column-heading { font-size: 0.92rem; }
+          .spec-card { padding: 0.75rem 0.9rem; }
+          .spec-title { font-size: 0.85rem; }
+          .spec-text { font-size: 0.82rem; }
+          .feature-row { font-size: 0.8rem; }
+          .tech-pill { font-size: 0.7rem; padding: 0.2rem 0.5rem; }
+          .spec-cta-btn { padding: 0.65rem 1rem; font-size: 0.82rem; }
+          .thumbnails-wrapper { gap: 0.3rem; padding: 0.5rem 0.6rem; }
+          .thumb-btn { width: 54px; height: 36px; }
+          .modal-footer {
+            padding: 0.75rem 1rem;
+            flex-direction: column;
+            gap: 0.5rem;
+            align-items: stretch;
+          }
           .footer-actions { justify-content: flex-end; }
+          .footer-info-text { font-size: 0.72rem; text-align: center; }
+          .lightbox-overlay { padding: 0.5rem; }
+          .lightbox-img-wrapper { max-width: 95vw; max-height: 85vh; }
+          .lightbox-img { max-width: 95vw; max-height: 85vh; }
+          .lightbox-close-btn { top: -38px; width: 32px; height: 32px; font-size: 0.9rem; }
         }
       `}</style>
     </div>

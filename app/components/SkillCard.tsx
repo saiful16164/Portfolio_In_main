@@ -70,6 +70,23 @@ export default function SkillCard({ name }: SkillCardProps) {
         .skill-card:hover .skill-title {
           color: var(--accent-light);
         }
+
+        @media (max-width: 480px) {
+          .skill-card {
+            padding: 1rem 0.65rem;
+            gap: 0.6rem;
+          }
+
+          .skill-logo-wrap {
+            width: 46px;
+            height: 46px;
+            border-radius: 12px;
+          }
+
+          .skill-title {
+            font-size: 0.8rem;
+          }
+        }
       `}</style>
     </div>
   );

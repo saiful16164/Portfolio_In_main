@@ -65,9 +65,30 @@ export default function SectionHeading({
           border-radius: 50%;
           background: var(--accent);
         }
-        @media (max-width: 640px) {
+        @media (max-width: 768px) {
+          .section-heading {
+            margin-bottom: 2.5rem;
+          }
           .section-title {
-            font-size: 1.9rem;
+            font-size: 2rem;
+          }
+          .section-subtitle {
+            font-size: 0.95rem;
+          }
+        }
+        @media (max-width: 480px) {
+          .section-heading {
+            margin-bottom: 2rem;
+          }
+          .section-title {
+            font-size: 1.65rem;
+          }
+          .section-subtitle {
+            font-size: 0.88rem;
+            margin-top: 0.65rem;
+          }
+          .section-underline {
+            margin-top: 1rem;
           }
         }
       `}</style>

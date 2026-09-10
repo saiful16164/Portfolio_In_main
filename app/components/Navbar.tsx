@@ -333,21 +333,23 @@ export default function Navbar() {
 
         /* ===== MOBILE MENU ===== */
         .mobile-menu {
-          display: none;
+          display: flex;
           flex-direction: column;
-          padding: 0.75rem 1rem 1rem;
+          padding: 0 1rem;
           gap: 0.2rem;
           border-top: 1px solid var(--border-color);
           background: var(--bg-secondary);
           max-height: 0;
           overflow: hidden;
           opacity: 0;
+          visibility: hidden;
           transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
         }
         .mobile-menu-open {
-          display: flex;
           max-height: 600px;
           opacity: 1;
+          visibility: visible;
+          padding: 0.75rem 1rem 1rem;
         }
         .mobile-nav-link {
           display: flex;

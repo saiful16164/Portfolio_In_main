@@ -425,6 +425,45 @@ export default function EventCard({
             font-size: 1.2rem;
           }
         }
+
+        @media (max-width: 480px) {
+          .event-stack-card {
+            padding: 1rem;
+            gap: 1rem;
+          }
+
+          .event-title {
+            font-size: 1.05rem;
+          }
+
+          .event-description {
+            font-size: 0.85rem;
+          }
+
+          .event-date-row {
+            font-size: 0.78rem;
+          }
+
+          .event-details-btn {
+            padding: 0.45rem 0.9rem;
+            font-size: 0.8rem;
+          }
+
+          .event-nav-btn {
+            width: 28px;
+            height: 28px;
+          }
+
+          .event-nav-btn svg {
+            width: 14px;
+            height: 14px;
+          }
+
+          .event-meta-header {
+            flex-direction: column;
+            align-items: flex-start;
+          }
+        }
       `}</style>
     </div>
   );
