@@ -155,6 +155,9 @@ export default function ProjectCard({ project, onClick }: ProjectCardProps) {
           flex-direction: column;
           overflow: hidden;
           height: 100%;
+          width: 100%;
+          min-width: 0;
+          max-width: 100%;
           cursor: pointer;
           transition: transform var(--transition-base), box-shadow var(--transition-base), border-color var(--transition-base);
           border: 1px solid var(--border-color);
@@ -230,7 +233,11 @@ export default function ProjectCard({ project, onClick }: ProjectCardProps) {
           top: 0.75rem;
           right: 0.75rem;
           display: flex;
+          align-items: center;
           gap: 0.4rem;
+          max-width: calc(100% - 1.5rem);
+          flex-wrap: wrap;
+          justify-content: flex-end;
           z-index: 2;
         }
 
@@ -312,12 +319,16 @@ export default function ProjectCard({ project, onClick }: ProjectCardProps) {
           flex-direction: column;
           gap: 0.75rem;
           flex: 1;
+          min-width: 0;
+          max-width: 100%;
         }
 
         .project-header {
           display: flex;
           flex-direction: column;
           gap: 0.25rem;
+          min-width: 0;
+          max-width: 100%;
         }
 
         .project-title {
@@ -339,6 +350,9 @@ export default function ProjectCard({ project, onClick }: ProjectCardProps) {
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
+          min-width: 0;
+          max-width: 100%;
+          display: block;
         }
 
         .project-desc {
@@ -369,7 +383,8 @@ export default function ProjectCard({ project, onClick }: ProjectCardProps) {
           display: flex;
           align-items: center;
           justify-content: space-between;
-          gap: 0.75rem;
+          flex-wrap: wrap;
+          gap: 0.5rem;
           padding-top: 0.75rem;
           border-top: 1px solid var(--border-color);
           margin-top: 0.5rem;
@@ -399,7 +414,8 @@ export default function ProjectCard({ project, onClick }: ProjectCardProps) {
         .project-ext-links {
           display: flex;
           align-items: center;
-          gap: 0.65rem;
+          flex-wrap: wrap;
+          gap: 0.5rem;
         }
 
         .project-link {
@@ -421,6 +437,33 @@ export default function ProjectCard({ project, onClick }: ProjectCardProps) {
 
         .project-link-demo:hover {
           color: var(--emerald-light);
+        }
+
+        @media (max-width: 480px) {
+          .project-content {
+            padding: 1.1rem 0.95rem;
+            gap: 0.65rem;
+          }
+          .project-title {
+            font-size: 1.15rem;
+          }
+          .project-desc {
+            font-size: 0.85rem;
+            line-height: 1.55;
+          }
+          .status-badge,
+          .featured-badge {
+            font-size: 0.62rem;
+            padding: 0.18rem 0.45rem;
+          }
+          .project-details-btn {
+            font-size: 0.78rem;
+            padding: 0.3rem 0.65rem;
+          }
+          .project-link {
+            font-size: 0.78rem;
+            padding: 0.2rem 0.35rem;
+          }
         }
       `}</style>
     </div>

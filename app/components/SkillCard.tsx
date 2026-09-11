@@ -73,18 +73,21 @@ export default function SkillCard({ name }: SkillCardProps) {
 
         @media (max-width: 480px) {
           .skill-card {
-            padding: 1rem 0.65rem;
-            gap: 0.6rem;
+            padding: 0.85rem 0.45rem;
+            gap: 0.5rem;
+            border-radius: var(--radius-sm);
           }
 
           .skill-logo-wrap {
-            width: 46px;
-            height: 46px;
-            border-radius: 12px;
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
           }
 
           .skill-title {
-            font-size: 0.8rem;
+            font-size: 0.76rem;
+            line-height: 1.25;
+            word-break: normal;
           }
         }
       `}</style>

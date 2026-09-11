@@ -141,7 +141,10 @@ export default function HomePage() {
         <div className="container hero-container">
           <div className="hero-content animate-fade-in-up">
             <div className="hero-badge badge">Welcome to my portfolio</div>
-            <h1 className="hero-name">Hi, I&apos;m <span className="accent-text">{personalInfo.name}</span></h1>
+            <h1 className="hero-name">
+              <span className="hero-greeting">Hi, I&apos;m </span>
+              <span className="accent-text hero-person-name">{personalInfo.name}</span>
+            </h1>
             <p className="hero-title">{personalInfo.title}</p>
             <p className="hero-bio">{personalInfo.bio}</p>
             <div className="hero-actions">
@@ -303,19 +306,17 @@ export default function HomePage() {
                         {paper.date}
                       </span>
                     )}
-                    {paper.date && paper.publicationName && <span className="meta-sep">•</span>}
-                    <span className="research-venue-pill">
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" /><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" /></svg>
-                      {paper.publicationName}
-                    </span>
+                    {paper.publicationName && (
+                      <span className="research-venue-pill">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" /><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" /></svg>
+                        {paper.publicationName}
+                      </span>
+                    )}
                     {paper.location && (
-                      <>
-                        <span className="meta-sep">•</span>
-                        <span className="research-meta-item">
-                          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" /><circle cx="12" cy="10" r="3" /></svg>
-                          {paper.location}
-                        </span>
-                      </>
+                      <span className="research-meta-item">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" /><circle cx="12" cy="10" r="3" /></svg>
+                        {paper.location}
+                      </span>
                     )}
                   </div>
 
@@ -358,7 +359,7 @@ export default function HomePage() {
           ) : (
             <div className="projects-grid">
               {allProjects.map((project: Project, i: number) => (
-                <div key={project.id} className="animate-fade-in-up" style={{ animationDelay: `${i * 0.1}s` }}>
+                <div key={project.id} className="project-grid-item animate-fade-in-up" style={{ animationDelay: `${i * 0.1}s` }}>
                   <ProjectCard
                     project={project}
                     onClick={() => setSelectedProject(project)}
@@ -628,6 +629,8 @@ export default function HomePage() {
         .hero-container { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 3rem; align-items: center; position: relative; z-index: 1; }
         .hero-badge { margin-bottom: 1.25rem; font-size: 0.85rem; color: var(--text-secondary); width: fit-content; }
         .hero-name { font-family: var(--font-playfair, var(--font-heading)); font-size: 3.5rem; font-weight: 700; letter-spacing: -0.02em; line-height: 1.15; margin-bottom: 0.75rem; }
+        .hero-greeting { display: inline; }
+        .hero-person-name { display: inline; }
         .hero-title { font-size: 1.15rem; color: var(--text-secondary); margin-bottom: 1rem; font-weight: 500; }
         .hero-bio { font-size: 1rem; color: var(--text-muted); line-height: 1.8; max-width: 520px; margin-bottom: 1.75rem; }
         .hero-actions { display: flex; gap: 1rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
@@ -643,7 +646,7 @@ export default function HomePage() {
         .stats-section { padding: 0 1.5rem 3rem; margin-top: -1rem; }
         .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
         .stat-card { padding: 1.5rem; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 0.3rem; }
-        .stat-value { font-family: var(--font-playfair, var(--font-heading)); font-size: 1.85rem; font-weight: 700; color: var(--accent); font-variant-numeric: tabular-nums; }
+        .stat-value { font-family: var(--font-body); font-size: 1.85rem; font-weight: 800; color: var(--accent); font-variant-numeric: tabular-nums; }
         .stat-label { font-size: 0.85rem; color: var(--text-muted); font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; }
 
         /* ===== ABOUT ===== */
@@ -682,7 +685,8 @@ export default function HomePage() {
         .search-input { padding: 0.55rem 1rem 0.55rem 2.25rem; font-size: 0.88rem; font-family: inherit; color: var(--text-primary); background: var(--bg-glass); border: 1px solid var(--border-color); border-radius: var(--radius-full); outline: none; min-width: 220px; transition: all var(--transition-fast); }
         .search-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15); }
         .search-input::placeholder { color: var(--text-muted); }
-        .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 1.5rem; }
+        .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); gap: 1.5rem; }
+        .project-grid-item { min-width: 0; width: 100%; display: flex; }
         .empty-state { text-align: center; padding: 4rem 1rem; color: var(--text-muted); display: flex; flex-direction: column; align-items: center; gap: 1rem; }
 
         /* ===== RESEARCH ===== */
@@ -966,23 +970,25 @@ export default function HomePage() {
 
         /* ===== RESPONSIVE ===== */
         @media (max-width: 768px) {
-          .hero { padding: 3rem 0 2rem; min-height: auto; }
-          .hero-container { grid-template-columns: 1fr; text-align: center; gap: 2rem; }
-          .hero-name { font-size: 2.2rem; }
+          .hero { padding: 3.5rem 0 2rem; min-height: auto; }
+          .hero-container { grid-template-columns: 1fr; text-align: center; gap: 1.75rem; }
+          .hero-name { font-size: 2.2rem; margin-bottom: 0.85rem; }
+          .hero-greeting { display: block; font-size: 1.12rem; font-weight: 500; color: var(--text-secondary); font-family: var(--font-body); margin-bottom: 0.25rem; letter-spacing: 0.02em; }
+          .hero-person-name { display: block; font-size: 2.2rem; line-height: 1.18; }
           .hero-title { font-size: 1rem; }
           .hero-bio { margin-left: auto; margin-right: auto; font-size: 0.92rem; }
           .hero-badge { margin-left: auto; margin-right: auto; }
           .hero-actions { justify-content: center; }
           .hero-socials { justify-content: center; }
-          .hero-visual { order: -1; max-width: 220px; }
-          .hero-img-wrapper { width: 200px; height: 200px; }
+          .hero-visual { order: -1; max-width: 200px; margin-bottom: 0.5rem; }
+          .hero-img-wrapper { width: 190px; height: 190px; }
           .hero-ambient { width: 500px; height: 500px; }
           .stats-section { padding: 0 1rem 2rem; }
           .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
           .stat-card { padding: 1.15rem 0.75rem; }
           .stat-value { font-size: 1.5rem; }
           .stat-label { font-size: 0.75rem; }
-          .projects-grid { grid-template-columns: 1fr; }
+          .projects-grid { grid-template-columns: minmax(0, 1fr); gap: 1.25rem; }
           .about-intro { flex-direction: column; align-items: center; text-align: center; padding: 1.5rem; }
           .about-section-title { font-size: 1.2rem; }
           .interests-grid { grid-template-columns: 1fr; }
@@ -994,7 +1000,7 @@ export default function HomePage() {
           .research-card { padding: 1.5rem 1.25rem; }
           .research-card-header { flex-direction: column; gap: 0.75rem; }
           .research-title { font-size: 1.15rem; }
-          .research-meta-row { font-size: 0.8rem; }
+          .research-meta-row { font-size: 0.82rem; gap: 0.4rem 0.75rem; }
           .research-footer { flex-direction: column; align-items: flex-start; gap: 0.85rem; }
           .research-actions { width: 100%; flex-wrap: wrap; }
           .resume-showcase-card { padding: 1.5rem; }
@@ -1008,24 +1014,28 @@ export default function HomePage() {
         }
 
         @media (max-width: 480px) {
-          .hero { padding: 2rem 0 1.5rem; }
-          .hero-name { font-size: 1.85rem; }
+          .hero { padding: 2.5rem 0 1.5rem; }
+          .hero-name { font-size: 1.95rem; margin-bottom: 0.65rem; }
+          .hero-greeting { font-size: 1.05rem; margin-bottom: 0.2rem; }
+          .hero-person-name { font-size: clamp(1.8rem, 6vw, 2.05rem); line-height: 1.18; }
           .hero-title { font-size: 0.92rem; }
-          .hero-bio { font-size: 0.88rem; }
-          .hero-visual { max-width: 180px; }
+          .hero-bio { font-size: 0.88rem; margin-bottom: 1.35rem; }
+          .hero-visual { max-width: 170px; margin-bottom: 0.35rem; }
           .hero-img-wrapper { width: 160px; height: 160px; }
-          .hero-actions { flex-direction: column; align-items: center; gap: 0.75rem; }
-          .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 0.5rem; }
+          .hero-actions { display: flex; flex-direction: row; justify-content: center; gap: 0.65rem; width: 100%; max-width: 340px; margin: 0 auto 1.35rem; }
+          .hero-actions .btn-primary,
+          .hero-actions .btn-outline { flex: 1; min-width: 125px; padding: 0.7rem 0.85rem; font-size: 0.86rem; justify-content: center; white-space: nowrap; }
+          .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 0.6rem; }
           .stat-card { padding: 1rem 0.5rem; }
-          .stat-value { font-size: 1.3rem; }
+          .stat-value { font-size: 1.35rem; }
           .about-intro { padding: 1.25rem; }
           .about-section-title { font-size: 1.1rem; }
           .timeline-heading { font-size: 1rem; }
           .timeline-sub { font-size: 0.82rem; }
           .timeline { padding-left: 1.25rem; }
           .research-card { padding: 1.25rem 1rem; }
-          .research-title { font-size: 1.05rem; }
-          .research-abstract { font-size: 0.85rem; }
+          .research-title { font-size: 1.08rem; line-height: 1.42; }
+          .research-abstract { font-size: 0.85rem; line-height: 1.7; }
           .research-authors { font-size: 0.85rem; }
           .research-doi-btn { padding: 0.4rem 0.75rem; font-size: 0.78rem; }
           .resume-showcase-card { padding: 1.15rem; gap: 1.25rem; }
@@ -1035,9 +1045,16 @@ export default function HomePage() {
           .blog-title { font-size: 1rem; }
           .blog-excerpt { font-size: 0.85rem; }
           .category-title { font-size: 1.1rem; }
-          .skills-logo-grid { grid-template-columns: repeat(3, 1fr); gap: 0.5rem; }
+          .skills-logo-grid { grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); gap: 0.5rem; }
           .contact-info-card { padding: 1rem; }
           .contact-social-card { padding: 1rem; }
+        }
+
+        @media (max-width: 360px) {
+          .hero-actions { flex-direction: column; align-items: stretch; max-width: 280px; }
+          .hero-actions .btn-primary,
+          .hero-actions .btn-outline { width: 100%; min-width: unset; }
+          .hero-img-wrapper { width: 140px; height: 140px; }
         }
       `}</style>
     </>
